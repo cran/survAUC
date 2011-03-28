@@ -50,9 +50,8 @@ SEXP Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 		factor1[i] = 1.0 / ((1.0 - sumf) * sumf);
 	}
 	
-	double *EW, *r2a;
+	double *EW;
 	EW = Calloc(N_th_times,double);
-	r2a = Calloc(N_th_times,double);
 	
 	int n_lpnew = INTEGER(N_LPNEW)[0];
 	for (i = 0; i < n_lpnew; i++){
@@ -73,6 +72,7 @@ SEXP Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 			REAL(AUC)[i] = 0.0;
 		}
 	}
+	Free(EW);Free(factor1);Free(surv_new);
 	PROTECT(IAUC = allocVector(REALSXP,1));
 	if(TIME_NEW == R_NilValue){
 		REAL(IAUC)[0]=0.0;

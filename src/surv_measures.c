@@ -273,9 +273,8 @@ void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, dou
 	double *pij0;
 	pij0 = Calloc(*n_stime, double);
 	
-	double time_i, tmp_sum;
+	double tmp_sum;
 	for(i=0; i<*n_stime; i++){
-		time_i = stime[i];
 		partLCoxIndiv(stime, &stime[i], n_stime, lp, pijbeta);
 		partLCoxIndiv(stime, &stime[i], n_stime, lp0, pij0);
 		tmp_sum=0.;
@@ -286,6 +285,7 @@ void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, dou
 		}
 		sF[i] = tmp_sum;
 	}
+	Free(pijbeta);Free(pij0);
 	double *surv;
 	surv = Calloc(*n_stime, double);
 	km_Daim(surv, stime, event, n_stime);
@@ -300,6 +300,7 @@ void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, dou
 		GammaHat += surv[i] * sF[i];
 	}
 	*XO = 1. - exp(-2*GammaHat);
+	Free(sF);Free(surv);
 }
 
 
