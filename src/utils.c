@@ -376,12 +376,14 @@ SEXP survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP L
 {
 	int *n_time = INTEGER(N_TIME);
 	int *n_lp = INTEGER(N_LP);
+	int *n_lpnew = INTEGER(N_LPNEW);
 	int i, j, k, time0;
 	
-	double *lp, *time, *event;
+	double *lp, *time, *event, *lpnew;
 	time = Calloc(*n_time, double);
 	event = Calloc(*n_time, double);
 	lp = Calloc(*n_lp, double);
+	lpnew = Calloc(*n_lpnew, double);
 	
 	for (i = 0; i < *n_lp; i++){
 		lp[i] = REAL(LP)[i];
@@ -390,8 +392,9 @@ SEXP survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP L
 		time[i] = REAL(TIME)[i];
 		event[i] = REAL(EVENT)[i];
 	}
-	double *lpnew = REAL(LPNEW);
-	int *n_lpnew = INTEGER(N_LPNEW);
+	for (i = 0; i < *n_lpnew; i++){
+		lpnew[i] = REAL(LPNEW)[i];
+	}
 
 	rsort_xyz(time, event, lp, *n_time);
 
@@ -467,4 +470,8 @@ SEXP survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP L
 	UNPROTECT(4);
 	return(result_out);
 }
+
+
+
+
 

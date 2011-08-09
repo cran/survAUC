@@ -2,9 +2,9 @@
 \alias{OXS}
 \alias{Nagelk}
 \alias{XO}
-\title{R2-type Coefficients for Time-to-event Data}
+\title{R2-type coefficients for Cox proportional hazards models}
 \description{
-R2-type Coefficients for Time-to-event Data
+R2-type Coefficients for Cox proportional hazards models
 }
 \usage{
 OXS(Surv.rsp, lp, lp0)
@@ -13,8 +13,19 @@ XO(Surv.rsp, lp, lp0)
 }
 \arguments{
   \item{Surv.rsp}{A \code{Surv(.,.)} object containing to the outcome of the test data.}
-  \item{lp}{The vector of linear predictors.}
-  \item{lp0}{The vector of linear predictors obtained from the null model.}
+  \item{lp}{The vector of predictors.}
+  \item{lp0}{The vector of predictors obtained from the covariate-free null model.}
+}
+\details{
+  The \code{OXS}, \code{Nagelk} and \code{XO} functions implement three types of R2 coefficients for right-censored
+  time-to-event data: (a) The coefficient proposed by O'Quigley et al. (2005) (\code{OXS}), (b)
+  the coefficient proposed by Nagelkerke (1991) (\code{Nagelk}) and (c) the
+  coefficient proposed by Xu and O'Quigley (1999) (\code{XO}).
+
+  Because the \code{OXS}, \code{Nagelk} and \code{XO} functions assume that \code{lp} and \code{lpnew} were
+  derived from a correctly specified Cox proportional hazards model, estimates obtained from these functions are only
+  valid if the Cox model holds.
+
 }
 \references{
 
@@ -27,6 +38,9 @@ hazards models.\cr \emph{Statistics in Medicine} \bold{24}, 479--489.\cr
 Xu, R. and J. O'Quigley (1999).\cr A measure of dependence for proportional
 hazards models.\cr \emph{Journal of Nonparametric Statistics} \bold{12}, 83--107.\cr
 
+}
+\value{
+  The estimated R2 coefficient.
 }
 
 \seealso{

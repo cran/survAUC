@@ -55,8 +55,13 @@ SEXP sens_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 	
 	int N_TH = LENGTH(THRESH);
 	int N_lpnew = INTEGER(N_LPNEW)[0];
-	PROTECT(sens = allocMatrix(REALSXP, N_times, N_TH));
-
+	PROTECT(sens = allocMatrix(REALSXP, N_times, N_TH+1));
+	/* last value of sensetivity */
+	for(i=N_times*N_TH; i < N_times*(N_TH+1); i++){
+		REAL(sens)[i] = 0.0;
+	}
+	
+	
 	/* type_sens = 0: incident
 	   type_sens = 1: cumulative */
 	
@@ -111,7 +116,7 @@ SEXP spez_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 			 SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW)
 {
 	int nrx, ncx, i, j, k;
-	SEXP S1a, xdims, sens;
+	SEXP S1a, xdims, spec;
 	
 	double *lp_new;
 	lp_new = Calloc(INTEGER(N_LPNEW)[0],double);
@@ -133,25 +138,28 @@ SEXP spez_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 	
 	int N_TH = LENGTH(THRESH);
 	int N_lpnew = INTEGER(N_LPNEW)[0];
-	PROTECT(sens = allocMatrix(REALSXP, N_times, N_TH));
-	
-	double tmp_sens_z, tmp_sens_n;
+	PROTECT(spec = allocMatrix(REALSXP, N_times, N_TH + 1));
+	/* last value of specificity */
+	for(i=N_times*N_TH; i < N_times*(N_TH+1); i++){
+		REAL(spec)[i] = 1.0;
+	}
+	double tmp_spec_z, tmp_spec_n;
 	for(i=0; i < N_TH; i++){
 		for(j=0; j < N_times; j++){
-			tmp_sens_z = 0.;
-			tmp_sens_n = 0.;
+			tmp_spec_z = 0.;
+			tmp_spec_n = 0.;
 			for(k=0; k < N_lpnew; k++){
 				if(lp_new[k] >= REAL(THRESH)[i]){
-					tmp_sens_z += surv_new[k*N_times + j];
+					tmp_spec_z += surv_new[k*N_times + j];
 				}
-				tmp_sens_n += surv_new[k*N_times + j];
+				tmp_spec_n += surv_new[k*N_times + j];
 			}
-			REAL(sens)[j + N_times*i] = 1. - tmp_sens_z / tmp_sens_n;
+			REAL(spec)[j + N_times*i] = 1. - tmp_spec_z / tmp_spec_n;
 		}
 	}
 	Free(lp_new);Free(surv_new);
 	UNPROTECT(1);
-	return(sens);
+	return(spec);
 }
 
 
@@ -184,16 +192,18 @@ SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME,
 	
 	int N_TH = LENGTH(THRESH);
 	int N_lpnew = INTEGER(N_LPNEW)[0];
-	PROTECT(spec = allocMatrix(REALSXP, N_times, N_TH));
-	
+	PROTECT(spec = allocMatrix(REALSXP, N_times, N_TH+1));
+	for(i=0; i < N_times; i++){
+		REAL(spec)[i] = 0.0;
+	}
 	/* Calculation of specificity */
 	double tmp_sens_z, tmp_sens_n;
-	for(i=0; i < N_TH; i++){
+	for(i=1; i < N_TH+1; i++){
 		for(j=0; j < N_times; j++){
 			tmp_sens_z = 0.;
 			tmp_sens_n = 0.;
 			for(k=0; k < N_lpnew; k++){
-				if(lp_new[k] >= REAL(THRESH)[i]){
+				if(lp_new[k] > REAL(THRESH)[i-1]){
 					tmp_sens_z += surv_new[k*N_times + j];
 				}
 				tmp_sens_n += surv_new[k*N_times + j];
@@ -204,17 +214,20 @@ SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME,
 	
 	/* Calculation of sensetivity */
 	SEXP sens;
-	PROTECT(sens = allocMatrix(REALSXP, N_times, N_TH));
-	
+	PROTECT(sens = allocMatrix(REALSXP, N_times, N_TH+1));
+	/* last value of sensetivity */
+	for(i=0; i < N_times; i++){
+		REAL(sens)[i] = 1.0;
+	}
 	/* type_sens = 0: incident
 	   type_sens = 1: cumulative */
 	if(!LOGICAL(TYPE_SENS)[0]){
-		for(i=0; i < N_TH; i++){
+		for(i=1; i < N_TH+1; i++){
 			for(j=0; j < N_times; j++){
 				tmp_sens_z = 0.;
 				tmp_sens_n = 0.;
 				for(k=0; k < N_lpnew; k++){
-					if(lp_new[k] >= REAL(THRESH)[i]){
+					if(lp_new[k] > REAL(THRESH)[i-1]){
 						tmp_sens_z += exp(lp_new[k]) * surv_new[k*N_times + j];
 					}
 					tmp_sens_n += exp(lp_new[k]) * surv_new[k*N_times + j];
@@ -228,12 +241,12 @@ SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME,
 		}
 	}else{
 		double tmp_sens_z, tmp_sens_n;
-		for(i=0; i < N_TH; i++){
+		for(i=1; i < N_TH+1; i++){
 			for(j=0; j < N_times; j++){
 				tmp_sens_z = 0.;
 				tmp_sens_n = 0.;
 				for(k=0; k < N_lpnew; k++){
-					if(lp_new[k] >= REAL(THRESH)[i]){
+					if(lp_new[k] > REAL(THRESH)[i-1]){
 						tmp_sens_z += 1.0 - surv_new[k*N_times + j];
 					}
 					tmp_sens_n += 1.0 - surv_new[k*N_times + j];
@@ -253,7 +266,7 @@ SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME,
 	PROTECT(AUC = allocVector(REALSXP, N_times));
 	for (i = 0; i < N_times; i++){
 		REAL(AUC)[i] = 0.;
-		for (j = 0; j < N_TH-1; j++){
+		for (j = 0; j < N_TH; j++){
 			REAL(AUC)[i] += ((REAL(sens)[i+N_times*j] + REAL(sens)[i+N_times*(1+j)])/2.0) * fabs((1.0-REAL(spec)[i+N_times*j]) - (1.0-REAL(spec)[i+N_times*(1+j)]));
 		}
 	}

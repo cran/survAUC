@@ -1,7 +1,7 @@
 
 
 ################################################################
-###						Shong & Zhou						####
+###						Song & Zhou						####
 ################################################################
 ## Surv.rsp		- the Surv(.,.) Outcome of training data
 ## Surv.rsp.new	- the Surv(.,.) Outcome of test data
@@ -44,7 +44,7 @@ sens.sh <- function(Surv.rsp, lp, lpnew, times, type="incident"){
 
 
 ################################################################
-###						Shong & Zhou						####
+###						Song & Zhou						####
 ################################################################
 ## Surv.rsp		- the Surv(.,.) Outcome of training data
 ## Surv.rsp.new	- the Surv(.,.) Outcome of test data
@@ -80,7 +80,7 @@ spec.sh <- function(Surv.rsp, lp, lpnew, times){
 
 
 ################################################################
-###						Shong & Zhou						####
+###						Song & Zhou						####
 ################################################################
 ## Surv.rsp		- the Surv(.,.) Outcome of training data
 ## Surv.rsp.new	- the Surv(.,.) Outcome of test data

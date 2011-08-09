@@ -1,4 +1,8 @@
-
-export(IntAUC, sens.uno, spec.uno, AUC.uno, sens.sh, spec.sh, AUC.sh, 
-		AUC.cd, AUC.hc, GHCI, predErr, OXS, Nagelk, XO, UnoC, schemper)
+export(IntAUC, sens.uno, spec.uno, AUC.uno,
+	sens.sh, spec.sh, AUC.sh, 
+	AUC.cd, AUC.hc, GHCI, 
+	predErr, OXS, Nagelk, XO, 
+	UnoC, schemper)
+S3method(plot, survAUC)
+S3method(plot, survErr)
 useDynLib(survAUC)

@@ -1,16 +1,20 @@
 ###########################################################
 ###             Schemper-Henderson estimator
 ###########################################################
-### This code has been adapted from Lusa et al. (2007)
-###
+
+### Programm fuer Cox-Modell (aus Lusa et al. 2007)
 ### liefert Objekt mit Zeitpunkten wie survfit ("timep")
 ### und prediction error curve ("Mhat")
+### -> mit seval, etc. weiterverwertbar
+
 ### train.fit = fit von cph()
 
 
 
 schemper <- function(train.fit, traindata, newdata)
 {
+	if(!inherits(train.fit,"Design"))
+		stop("\nThe Cox model has to be estimated via the cph function of the Design package.\n")
     f.Mt <- function(tempo, tutti.tempi, stima.surv, tempi.evento,
 					 Stj, ind.censura, num.sogg)
 		{

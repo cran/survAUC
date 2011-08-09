@@ -52,7 +52,7 @@ void Hung_Chiang(double *time, int *n_time, double *stime, double *event, int *n
 	for(k=0; k<*n_time; k++){
 		for(i=0; i<*n_lpnew; i++){
 			for(j=0; j<*n_lpnew; j++){
-				if(i != j && (event_new[i] && (lpnew[i] > lpnew[j]) && (stime_new[i] <= time[k] && stime_new[j] > time[k])) && (Sca[i] > FLT_EPSILON)){
+				if(i != j && ((event_new[i] && (lpnew[i] > lpnew[j]) && (stime_new[i] <= time[k] && stime_new[j] > time[k])) && (Sca[i] > FLT_EPSILON))){
 					ans[k] += 1.0 / (Sca[i]);
 				}
 			}

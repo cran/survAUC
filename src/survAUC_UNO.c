@@ -86,11 +86,14 @@ void sens_uno( double *sens, double *surv_time, double *status, double *thres, d
 		for (j = 0; j < *n_t; j++){
 			Ivec_zse=0.0, Ivec_nse=0.0;
 			for (i = 0; i < *n_new_data; i++){
-				tmp_Ivec_nse = (t[j] >= new_surv[i]);
-				Ivec_zse += new_event[i] * ((marker[i] > thres[k-1]) * tmp_Ivec_nse) / G[i];
-				Ivec_nse += new_event[i] * tmp_Ivec_nse / G[i];
+				if(t[j] >= new_surv[i]){
+					if(marker[i] > thres[k-1]){
+						Ivec_zse += new_event[i] / G[i];
+					}
+					Ivec_nse += new_event[i] / G[i];
+				}
 			}
-			if(Ivec_nse != 0.0){
+			if(Ivec_nse > FLT_EPSILON){
 				sens[k*(*n_t)+j] = Ivec_zse/Ivec_nse;
 			}else{
 				sens[k*(*n_t)+j] = 0.0;
@@ -176,7 +179,7 @@ void auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *su
 	}
 	/* Calculation of AUC */
 	for (i = 0; i < *n_t; i++){
-		for (j = 0; j < *n_th-1; j++){
+		for (j = 0; j < *n_th; j++){
 			auc[i] += ((sens[i+*n_t*j] + sens[i+*n_t*(1+j)])/2.0) * fabs((1.0-spec[i+*n_t*j]) - (1.0-spec[i+*n_t*(1+j)]));
 		}
 	}

@@ -145,7 +145,7 @@ SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	REAL(IERR)[0] = 0.;
 	if(INTEGER(INTEG)[0]){
 		for (i = 0; i < N_th_times-1; i++){
-			REAL(IERR)[0] += ((REAL(TH_TIME)[i+1] - REAL(TH_TIME)[i])/2.0) * fabs(REAL(ERR)[i] + REAL(ERR)[i+1]);
+			REAL(IERR)[0] += ((REAL(TH_TIME)[i+1] + REAL(TH_TIME)[i])/2.0) * fabs(REAL(ERR)[i+1] - REAL(ERR)[i]);
 		}
 		REAL(IERR)[0] /= dmax(REAL(TH_TIME), N_th_times) - dmin(REAL(TH_TIME), N_th_times);
 	}else{
@@ -180,7 +180,7 @@ SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	PROTECT(result = allocVector(VECSXP,3));
 	PROTECT(names_result = allocVector(STRSXP, 3));
 	SET_STRING_ELT(names_result, 0, mkChar("error"));
-	SET_STRING_ELT(names_result, 1, mkChar("time"));
+	SET_STRING_ELT(names_result, 1, mkChar("times"));
 	SET_STRING_ELT(names_result, 2, mkChar("ierror"));
 	setAttrib(result, R_NamesSymbol, names_result);
 	UNPROTECT(1);
