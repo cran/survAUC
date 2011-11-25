@@ -1,7 +1,7 @@
 
 
 ################################################################
-###						Song & Zhou						####
+###						Song & Zhou			     			####
 ################################################################
 ## Surv.rsp		- the Surv(.,.) Outcome of training data
 ## Surv.rsp.new	- the Surv(.,.) Outcome of test data

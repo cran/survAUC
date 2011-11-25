@@ -17,5 +17,9 @@ SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 			   SEXP LPNEW, SEXP N_LPNEW, SEXP TYPE, SEXP INTEG);
 void partLCoxIndiv(double *stime, double *time, int *n_stime, double *lp, double *LL);
 void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, double *XO);
-void UnoC(double *stime, double *event, int *n_stime, double *new_stime, double *new_event, int *new_n_stime,
-		  double *lp, double *tau, int *n_tau, double *CStat);
+void UnoC(double *stime, double *event, int *n_stime, double *new_stime,
+		  double *new_event, int *new_n_stime, double *lp, double *tau,
+		  int *n_tau, double *CStat);
+void c_begg(double *new_stime, double *new_event, int *new_n_stime,
+			  double *times, int *n_times, double *lp, double *lpnew, 
+			  double *surv_prob, double *surv_times, int *n_surv_times, double *CStat)

@@ -2,7 +2,7 @@ export(IntAUC, sens.uno, spec.uno, AUC.uno,
 	sens.sh, spec.sh, AUC.sh, 
 	AUC.cd, AUC.hc, GHCI, 
 	predErr, OXS, Nagelk, XO, 
-	UnoC, schemper)
+	UnoC, schemper, BeggC)
 S3method(plot, survAUC)
 S3method(plot, survErr)
 useDynLib(survAUC)

@@ -1,0 +1,241 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXFileReference section */
+		4D3A7B74148E4F4600EB5DB7 /* AUC.Song_Zhou.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUC.Song_Zhou.Rd; sourceTree = "<group>"; };
+		4D3A7B77148E4F5400EB5DB7 /* survAUC_Song_Zhou.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = survAUC_Song_Zhou.R; sourceTree = "<group>"; };
+		4D3D4A3713E7CC5800BE6702 /* UnoC.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnoC.Rd; sourceTree = "<group>"; };
+		4D3D4BD913E8275C00BE6702 /* plot.survAUC.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = plot.survAUC.R; sourceTree = "<group>"; };
+		4D3D4BF413E82F7400BE6702 /* plot.survAUC.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plot.survAUC.Rd; sourceTree = "<group>"; };
+		4D77E5331268AB570042AF71 /* schemper.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = schemper.R; sourceTree = "<group>"; };
+		4D85FCE0148F9C6D00D67C75 /* BaggC.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = BaggC.R; sourceTree = "<group>"; };
+		4D85FCE3148F9C7700D67C75 /* BeggC.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BeggC.Rd; sourceTree = "<group>"; };
+		4D9FDB8F12683FC300E3BD3F /* DESCRIPTION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DESCRIPTION; sourceTree = "<group>"; };
+		4D9FDB9212683FC300E3BD3F /* IntegratedAUC.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IntegratedAUC.Rd; sourceTree = "<group>"; };
+		4D9FDB9312683FC300E3BD3F /* AUC.uno.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUC.uno.Rd; sourceTree = "<group>"; };
+		4D9FDB9512683FC300E3BD3F /* AUC.ChamDiao.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUC.ChamDiao.Rd; sourceTree = "<group>"; };
+		4D9FDB9612683FC300E3BD3F /* GHCI.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GHCI.Rd; sourceTree = "<group>"; };
+		4D9FDB9712683FC300E3BD3F /* predErr.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = predErr.Rd; sourceTree = "<group>"; };
+		4D9FDB9F12683FC300E3BD3F /* NAMESPACE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NAMESPACE; sourceTree = "<group>"; };
+		4D9FDBA112683FC300E3BD3F /* surv_measures.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = surv_measures.R; sourceTree = "<group>"; };
+		4D9FDBA212683FC300E3BD3F /* survAUC_HZ.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = survAUC_HZ.R; sourceTree = "<group>"; };
+		4D9FDBA412683FC300E3BD3F /* utils.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = utils.R; sourceTree = "<group>"; };
+		4D9FDBA512683FC300E3BD3F /* zzz.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = zzz.R; sourceTree = "<group>"; };
+		4D9FDBA712683FC300E3BD3F /* surv_measures.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = surv_measures.c; sourceTree = "<group>"; };
+		4D9FDBA812683FC300E3BD3F /* surv_measures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = surv_measures.h; sourceTree = "<group>"; };
+		4D9FDBA912683FC300E3BD3F /* survAUC_Cham_Diao.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = survAUC_Cham_Diao.c; sourceTree = "<group>"; };
+		4D9FDBAA12683FC300E3BD3F /* survAUC_Cham_Diao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = survAUC_Cham_Diao.h; sourceTree = "<group>"; };
+		4D9FDBAB12683FC300E3BD3F /* survAUC_HZ.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = survAUC_HZ.c; sourceTree = "<group>"; };
+		4D9FDBAC12683FC300E3BD3F /* survAUC_HZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = survAUC_HZ.h; sourceTree = "<group>"; };
+		4D9FDBAD12683FC300E3BD3F /* survAUC_SongZhou.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = survAUC_SongZhou.c; sourceTree = "<group>"; };
+		4D9FDBAE12683FC300E3BD3F /* survAUC_SongZhou.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = survAUC_SongZhou.h; sourceTree = "<group>"; };
+		4D9FDBAF12683FC300E3BD3F /* survAUC_UNO.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = survAUC_UNO.c; sourceTree = "<group>"; };
+		4D9FDBB012683FC300E3BD3F /* survAUC_UNO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = survAUC_UNO.h; sourceTree = "<group>"; };
+		4D9FDBB112683FC300E3BD3F /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = utils.c; sourceTree = "<group>"; };
+		4D9FDBB212683FC300E3BD3F /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		4D9FDC0B12684A6500E3BD3F /* survFitCox.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = survFitCox.R; sourceTree = "<group>"; };
+		4D9FDC0C12684AA700E3BD3F /* survAUC_ChamDiao.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = survAUC_ChamDiao.R; sourceTree = "<group>"; };
+		4D9FDC0E12684BA500E3BD3F /* survAUC_Uno.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = survAUC_Uno.R; sourceTree = "<group>"; };
+		4D9FDC0F12684BE600E3BD3F /* IntegratedAUC.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = IntegratedAUC.R; sourceTree = "<group>"; };
+		4DB8F7B8126C467600373B21 /* Makevars */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makevars; sourceTree = "<group>"; };
+		4DB8F7CC126C4F4900373B21 /* schemper.Err.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schemper.Err.Rd; sourceTree = "<group>"; };
+		4DD40227133C7F0C0069D5C6 /* UnoC.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = UnoC.R; sourceTree = "<group>"; };
+		4DEC692E126ED51500733A76 /* survAUC_Hung_Chiang.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = survAUC_Hung_Chiang.c; sourceTree = "<group>"; };
+		4DEC692F126ED51F00733A76 /* survAUC_Hung_Chiang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = survAUC_Hung_Chiang.h; sourceTree = "<group>"; };
+		4DEC695A126F060300733A76 /* survAUC_HungChiang.R */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = survAUC_HungChiang.R; sourceTree = "<group>"; };
+		4DEC69DA126F267C00733A76 /* AUC.HungChiang.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUC.HungChiang.Rd; sourceTree = "<group>"; };
+		4DF9FA38131D5F3500D01A7D /* OXS.Rd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OXS.Rd; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* survM */ = {
+			isa = PBXGroup;
+			children = (
+				4D9FDB8F12683FC300E3BD3F /* DESCRIPTION */,
+				4D9FDB9012683FC300E3BD3F /* man */,
+				4D9FDB9F12683FC300E3BD3F /* NAMESPACE */,
+				4D9FDBA012683FC300E3BD3F /* R */,
+				4D9FDBA612683FC300E3BD3F /* src */,
+			);
+			name = survM;
+			sourceTree = "<group>";
+		};
+		4D9FDB9012683FC300E3BD3F /* man */ = {
+			isa = PBXGroup;
+			children = (
+				4D3D4BF413E82F7400BE6702 /* plot.survAUC.Rd */,
+				4D3D4A3713E7CC5800BE6702 /* UnoC.Rd */,
+				4DF9FA38131D5F3500D01A7D /* OXS.Rd */,
+				4D9FDB9212683FC300E3BD3F /* IntegratedAUC.Rd */,
+				4D85FCE3148F9C7700D67C75 /* BeggC.Rd */,
+				4D3A7B74148E4F4600EB5DB7 /* AUC.Song_Zhou.Rd */,
+				4D9FDB9312683FC300E3BD3F /* AUC.uno.Rd */,
+				4DB8F7CC126C4F4900373B21 /* schemper.Err.Rd */,
+				4D9FDB9512683FC300E3BD3F /* AUC.ChamDiao.Rd */,
+				4D9FDB9612683FC300E3BD3F /* GHCI.Rd */,
+				4DEC69DA126F267C00733A76 /* AUC.HungChiang.Rd */,
+				4D9FDB9712683FC300E3BD3F /* predErr.Rd */,
+			);
+			path = man;
+			sourceTree = "<group>";
+		};
+		4D9FDBA012683FC300E3BD3F /* R */ = {
+			isa = PBXGroup;
+			children = (
+				4D3D4BD913E8275C00BE6702 /* plot.survAUC.R */,
+				4DD40227133C7F0C0069D5C6 /* UnoC.R */,
+				4D3A7B77148E4F5400EB5DB7 /* survAUC_Song_Zhou.R */,
+				4D9FDC0F12684BE600E3BD3F /* IntegratedAUC.R */,
+				4DEC695A126F060300733A76 /* survAUC_HungChiang.R */,
+				4D85FCE0148F9C6D00D67C75 /* BaggC.R */,
+				4D77E5331268AB570042AF71 /* schemper.R */,
+				4D9FDC0E12684BA500E3BD3F /* survAUC_Uno.R */,
+				4D9FDC0C12684AA700E3BD3F /* survAUC_ChamDiao.R */,
+				4D9FDC0B12684A6500E3BD3F /* survFitCox.R */,
+				4D9FDBA112683FC300E3BD3F /* surv_measures.R */,
+				4D9FDBA212683FC300E3BD3F /* survAUC_HZ.R */,
+				4D9FDBA412683FC300E3BD3F /* utils.R */,
+				4D9FDBA512683FC300E3BD3F /* zzz.R */,
+			);
+			path = R;
+			sourceTree = "<group>";
+		};
+		4D9FDBA612683FC300E3BD3F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4DB8F7B8126C467600373B21 /* Makevars */,
+				4D9FDBA712683FC300E3BD3F /* surv_measures.c */,
+				4D9FDBA812683FC300E3BD3F /* surv_measures.h */,
+				4D9FDBA912683FC300E3BD3F /* survAUC_Cham_Diao.c */,
+				4D9FDBAA12683FC300E3BD3F /* survAUC_Cham_Diao.h */,
+				4DEC692F126ED51F00733A76 /* survAUC_Hung_Chiang.h */,
+				4DEC692E126ED51500733A76 /* survAUC_Hung_Chiang.c */,
+				4D9FDBAB12683FC300E3BD3F /* survAUC_HZ.c */,
+				4D9FDBAC12683FC300E3BD3F /* survAUC_HZ.h */,
+				4D9FDBAD12683FC300E3BD3F /* survAUC_SongZhou.c */,
+				4D9FDBAE12683FC300E3BD3F /* survAUC_SongZhou.h */,
+				4D9FDBAF12683FC300E3BD3F /* survAUC_UNO.c */,
+				4D9FDBB012683FC300E3BD3F /* survAUC_UNO.h */,
+				4D9FDBB112683FC300E3BD3F /* utils.c */,
+				4D9FDBB212683FC300E3BD3F /* utils.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		D28A88AD04BDD90700651E21 /* survM */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "CMD $buildsetting survAUC";
+			buildConfigurationList = 1DEB918F08733D9F0010E9CD /* Build configuration list for PBXLegacyTarget "survM" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/R;
+			buildWorkingDirectory = /Users/sergejpotapov/Code/Projects;
+			dependencies = (
+			);
+			name = survM;
+			passBuildSettingsInEnvironment = 1;
+			productName = survM;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = NO;
+			};
+			buildConfigurationList = 1DEB919308733D9F0010E9CD /* Build configuration list for PBXProject "survAUC" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* survM */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D28A88AD04BDD90700651E21 /* survM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB919008733D9F0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = survAUC;
+				buildsetting = check;
+			};
+			name = Debug;
+		};
+		1DEB919108733D9F0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = survAUC;
+				buildsetting = build;
+			};
+			name = Release;
+		};
+		1DEB919408733D9F0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB919508733D9F0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB918F08733D9F0010E9CD /* Build configuration list for PBXLegacyTarget "survM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB919008733D9F0010E9CD /* Debug */,
+				1DEB919108733D9F0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB919308733D9F0010E9CD /* Build configuration list for PBXProject "survAUC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB919408733D9F0010E9CD /* Debug */,
+				1DEB919508733D9F0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

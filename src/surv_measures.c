@@ -365,6 +365,86 @@ void UnoC(double *stime, double *event, int *n_stime, double *new_stime, double 
 
 
 
+/* Calculation of 'C-Statistic' suggest by Begg */
+
+void c_begg(double *new_stime, double *new_event, int *new_n_stime,
+			  double *times, int *n_times, double *lp, double *lpnew, 
+			  double *surv_prob, double *surv_times, int *n_surv_times, double *CStat)
+{
+	int i, j;
+	double *surv_new;
+	surv_new = Calloc((*n_times)*(*new_n_stime),double);
+	step_eval3(surv_new, times, surv_prob, surv_times, *n_times, *new_n_stime, *n_surv_times);
+	
+	double tempC=0.0, Cindex=0.0;
+	for(i=0; i < *new_n_stime; i++){
+		for(j=0; j < *new_n_stime; j++){
+			tempC=0.0;
+			if(fabs(lpnew[i] - lpnew[j]) <= FLT_EPSILON){
+				tempC = 0.5;
+			}else{
+				if(lpnew[i] > lpnew[j]){
+					if((new_event[i] == 1.0) && (new_event[j] == 1.0) && (new_stime[i] < new_stime[j])){
+						tempC = 1.0;
+					}
+					if((new_event[i] == 0.0) && (new_event[j] == 1.0) && (new_stime[i] < new_stime[j])){
+						if(surv_new[i+*new_n_stime*i] > FLT_EPSILON){
+							tempC = (surv_new[i+*new_n_stime*i] - surv_new[j+*new_n_stime*i])/surv_new[i+*new_n_stime*i];
+						}else{
+							tempC = 0.0;
+						}
+					}
+					if((new_event[i] == 1.0) && (new_event[j] == 0.0) && (new_stime[i] < new_stime[j])){
+						tempC = 1.0;
+					}
+					if((new_event[i] == 1.0) && (new_event[j] == 0.0) && (new_stime[i] > new_stime[j])){
+						if(surv_new[j+*new_n_stime*j] > FLT_EPSILON){
+							tempC = surv_new[i+*new_n_stime*j]/surv_new[j+*new_n_stime*j];
+						}else{
+							tempC = 0.0;
+						}
+					}
+					if((new_event[i] == 0.0) && (new_event[j] == 0.0) && (new_stime[i] < new_stime[j])){
+						if(surv_new[i+*new_n_stime*i] > FLT_EPSILON){
+							tempC = (surv_new[i+*new_n_stime*i] - surv_new[j+*new_n_stime*i]/2.0)/surv_new[i+*new_n_stime*i];
+						}else{
+							tempC = 0.0;
+						}
+					}
+					if((new_event[i] == 0.0) && (new_event[j] == 0.0) && (new_stime[i] > new_stime[j])){
+						if(surv_new[j+*new_n_stime*j] > FLT_EPSILON){
+							tempC = surv_new[i+*new_n_stime*j]/surv_new[j+*new_n_stime*j]/2.0;
+						}else{
+							tempC = 0.0;
+						}
+					}
+				}else{
+					if(lpnew[i] < lpnew[j]){
+						tempC = 0.0;
+					}
+				}
+			}
+			if((fabs(lpnew[i] - lpnew[j]) <= FLT_EPSILON) && (i == j)){
+				tempC = tempC/2.0;
+			}
+			if(i == j){
+				tempC = 0.0;
+			}
+			Cindex = Cindex + tempC;
+		}
+	}
+	*CStat = Cindex / (*new_n_stime * (*new_n_stime - 1.0) / 2.0);
+	Free(surv_new);
+}
+
+
+
+
+
+
+
+
+
 
 
 
