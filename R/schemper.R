@@ -13,8 +13,8 @@
 
 schemper <- function(train.fit, traindata, newdata)
 {
-	if(!inherits(train.fit,"Design"))
-		stop("\nThe Cox model has to be estimated via the cph function of the Design package.\n")
+	if(!inherits(train.fit,"rms"))
+		stop("\nThe Cox model has to be estimated via the cph function of the rms package.\n")
     f.Mt <- function(tempo, tutti.tempi, stima.surv, tempi.evento,
 					 Stj, ind.censura, num.sogg)
 		{

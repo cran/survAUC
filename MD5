@@ -1,9 +1,9 @@
-28370d6bf3298d6ef744cc3e95d24dd0 *DESCRIPTION
+11e17f14c9242b1dc4492fd141f08318 *DESCRIPTION
 49039111f892a71cfc13b5cf8fd85264 *NAMESPACE
 74a69cca166bb50589ad57786930e29d *R/IntegratedAUC.R
 2147cbca557c1803e88f94fc7cac65f8 *R/UnoC.R
 96d9744056221357b6002350f46c14ed *R/plot.survAUC.R
-f3cdaaab115d086a0992a75ab4ce7a56 *R/schemper.R
+3c61e641afdd7171bca915520fa40b72 *R/schemper.R
 6f8371599871feb6f07788ecdd8d2355 *R/survAUC_ChamDiao.R
 23c2354a7ddd55fb0a934611eff70f68 *R/survAUC_HZ.R
 467d66d210e03b232aeaa9901063938c *R/survAUC_HungChiang.R
@@ -23,7 +23,7 @@ cdb7951c2eb655f4d55e13c75aacff70 *man/OXS.Rd
 a04a5a6477a9d9d1d2a2f66191987044 *man/UnoC.Rd
 6efe56faa82eec0ca79531beb07098cf *man/plot.survAUC.Rd
 98289aa2f7c6bea6f02aaf9650fb4c2f *man/predErr.Rd
-bc67a8cbc19f4b084dcd885cfd422625 *man/schemper.Err.Rd
+6579cdc3a0e52df4776e32475cb5991b *man/schemper.Err.Rd
 8d46d69896a1f1d31ed76035a0e49d67 *src/Makevars
 028bfde75cdb3e771acec7efddbae627 *src/survAUC_Cham_Diao.c
 a11fe64748c97c1d5f2e396f11fff6e5 *src/survAUC_Cham_Diao.h

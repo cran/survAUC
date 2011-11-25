@@ -68,7 +68,7 @@ survival analysis using R and S-PLUS.\cr
 
 \examples{
 
-library(Design)
+library(rms)
 ovarian$time <- ovarian$futime
 ovarian$status <- ovarian$fustat
 set.seed(2011)
