@@ -1,4 +1,4 @@
-53fed3efdb8c66ba5bf4db1189a84514 *DESCRIPTION
+03638f0685de395f2ba41402568f1480 *DESCRIPTION
 884ae78b2897f6c3ba25d300d58a8e75 *NAMESPACE
 541f05a9c5186fd6368824dde09720fd *R/BaggC.R
 74a69cca166bb50589ad57786930e29d *R/IntegratedAUC.R
@@ -12,20 +12,8 @@
 a683f3723dd9469d55fb99e12b62ae8d *R/survAUC_Uno.R
 b0127c9025f9c7147cd2337dbf191160 *R/survFitCox.R
 4a8226d6b1fba82c0dc8e7631177a936 *R/surv_measures.R
-b7b4bb6214ed80638287d279017f9292 *R/utils.R
+e6cc215c9e9239d7aa70f688b5a957cc *R/utils.R
 49d9275158544d9268f23d627aa2e1ef *R/zzz.R
-10f8eb5cad56e3ac8d29a0123aff9820 *build/survAUC.build/survAUC.pbxindex/categories.pbxbtree
-92cf11a2afdab7c210fc8e4f73ec1636 *build/survAUC.build/survAUC.pbxindex/cdecls.pbxbtree
-959527175612a14274826dbaae77ab15 *build/survAUC.build/survAUC.pbxindex/decls.pbxbtree
-ddf70ee99f8af02105cf64ac93ba3d09 *build/survAUC.build/survAUC.pbxindex/files.pbxbtree
-2c49f971212955626f5e08504564f2bf *build/survAUC.build/survAUC.pbxindex/imports.pbxbtree
-65d57bc0b5489397fa2441889bb4d0d4 *build/survAUC.build/survAUC.pbxindex/pbxindex.header
-10f8eb5cad56e3ac8d29a0123aff9820 *build/survAUC.build/survAUC.pbxindex/protocols.pbxbtree
-eb4cecf1c2769b9fe4b3ed53e3b7181a *build/survAUC.build/survAUC.pbxindex/refs.pbxbtree
-2f6a61016f6ae28c45fd7da4032acfd9 *build/survAUC.build/survAUC.pbxindex/strings.pbxstrings/control
-70d9d1a9f7853ec93e9c67ba83594488 *build/survAUC.build/survAUC.pbxindex/strings.pbxstrings/strings
-0ed96bd2453abd218302e307e4890f92 *build/survAUC.build/survAUC.pbxindex/subclasses.pbxbtree
-f9170ecb0739ab739e18b76cc9d21a02 *build/survAUC.build/survAUC.pbxindex/symbols0.pbxsymbols
 d6598137e0d6738a13b18dd92bafce39 *man/AUC.ChamDiao.Rd
 80b6210c1749c484568f60439188e841 *man/AUC.HungChiang.Rd
 f08627e786ef51aa39a30b078273f017 *man/AUC.Song_Zhou.Rd
@@ -53,6 +41,3 @@ e5c26e2dcea37f5ceac5e99d79b2fd4c *src/survAUC_UNO.h
 890ebe6159ce2a6c121dc99e311b4014 *src/surv_measures.h
 7d18057753be10c604960c1335b364a2 *src/utils.c
 ee8983cd05b1054f2be0087a7d6081e7 *src/utils.h
-d29483703d76c272e317ee6afdf68ecc *survAUC.xcodeproj/project.pbxproj
-9ed76e196e641a83b8b667bdae77ab1d *survAUC.xcodeproj/sergejpotapov.mode1v3
-cc121596316cbb1d5199badc0b61d738 *survAUC.xcodeproj/sergejpotapov.pbxuser
