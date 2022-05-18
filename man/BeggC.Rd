@@ -38,16 +38,16 @@ staging and grading systems: a case study and a review of the issues, using thym
   \code{\link{UnoC}}, \code{\link{GHCI}}, \code{\link{AUC.sh}}, \code{\link{IntAUC}}
 }
 \examples{
-
+data(cancer,package="survival")
 TR <- ovarian[1:16,]
 TE <- ovarian[17:26,]
-train.fit  <- coxph(Surv(futime, fustat) ~ age,
+train.fit  <- survival::coxph(survival::Surv(futime, fustat) ~ age,
                     x=TRUE, y=TRUE, method="breslow", data=TR)
 
 lp <- predict(train.fit)
 lpnew <- predict(train.fit, newdata=TE)
-Surv.rsp <- Surv(TR$futime, TR$fustat)
-Surv.rsp.new <- Surv(TE$futime, TE$fustat)              
+Surv.rsp <- survival::Surv(TR$futime, TR$fustat)
+Surv.rsp.new <- survival::Surv(TE$futime, TE$fustat)              
 
 Cstat <- BeggC(Surv.rsp, Surv.rsp.new, lp, lpnew)
 Cstat

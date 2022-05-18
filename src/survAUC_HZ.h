@@ -7,4 +7,4 @@
  *
  */
 
-void cox_weights (double *marker, double *time, int *status, double *target, double *AUC, int *N_st);
+void C_cox_weights (double *marker, double *time, int *status, double *target, double *AUC, int *N_st);

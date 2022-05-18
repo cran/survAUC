@@ -24,7 +24,7 @@ AUC.hc <- function(Surv.rsp, Surv.rsp.new, lpnew, times)
 	n_lpnew <- length(lpnew)
 	auc <- vector("numeric",n_time)
 	
-	ans <- .C("Hung_Chiang",
+	ans <- .C("C_Hung_Chiang",
 			  as.numeric(times),
 			  as.integer(n_time),
 			  as.numeric(stime),
@@ -36,8 +36,9 @@ AUC.hc <- function(Surv.rsp, Surv.rsp.new, lpnew, times)
 			  as.numeric(lpnew),
 			  as.integer(n_lpnew),
 			  as.numeric(auc),
-			  as.numeric(0),
-			  PACKAGE="survAUC")
+			  as.numeric(0))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	erg <- list(auc=ans[[11]], times=times, iauc=ans[[12]])
 	class(erg) <- "survAUC"
 	erg

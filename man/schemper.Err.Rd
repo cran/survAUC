@@ -67,15 +67,14 @@ survival analysis using R and S-PLUS.\cr
 }
 
 \examples{
-
-library(rms)
+data(cancer,package="survival")
 ovarian$time <- ovarian$futime
 ovarian$status <- ovarian$fustat
 set.seed(2011)
 trobs <- sample(1:26,16)
 TR <- ovarian[trobs,]
 TE <- ovarian[-trobs,]
-train.fit  <- cph(Surv(time, status) ~ age,
+train.fit  <- rms::cph(survival::Surv(time, status) ~ age,
                   x=TRUE, y=TRUE, method="breslow", data=TR)
 
 schemper(train.fit, TR, TE)

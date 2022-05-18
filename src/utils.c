@@ -61,7 +61,7 @@ double d_mean(double *X, int n)
  */
 
 
-void step_eval_R(double *s_new, double *t_new, double *s, double *t, int *n_new, int *n)
+void C_step_eval_R(double *s_new, double *t_new, double *s, double *t, int *n_new, int *n)
 {
 	int i,j,optim;
 	
@@ -254,7 +254,7 @@ void rsort_xyzv(double *x, double *y, double *z, double *indx, int n)
 /* weighted KM - from risksetROC */
 
 
-void km_weight( double *surv, double *time, double *status, double *wt, double *entry, int *n_time){
+void C_km_weight( double *surv, double *time, double *status, double *wt, double *entry, int *n_time){
 	int i, j, dead, at_risk;
 	rsort_with_x(time,status,*n_time);
 	
@@ -262,8 +262,8 @@ void km_weight( double *surv, double *time, double *status, double *wt, double *
 	for(i=0; i < *n_time; i++){
 		dead=0; at_risk=0;
 		for(j=0; j < *n_time; j++){
-			at_risk += (entry[i] <= time[j]) && (time[i] <= time[j]) * wt[i];
-			dead += (entry[i] <= time[j]) && (time[i] == time[j]) && (status[i])*wt[i];
+			at_risk += ((entry[i] <= time[j]) && (time[i] <= time[j])) * wt[i];
+			dead += ((entry[i] <= time[j]) && (time[i] == time[j]) && (status[i]))*wt[i];
 		}
 		current = current * (1.0 - (double)dead / (double)at_risk);
 		surv[i] = current;
@@ -274,7 +274,7 @@ void km_weight( double *surv, double *time, double *status, double *wt, double *
 /* Kaplan-Meier estimation  */
 
 
-void km_Daim( double *surv, double *time, double *status, int *n_time){
+void C_km_Daim( double *surv, double *time, double *status, int *n_time){
 	int i, j, dead, at_risk;
 	rsort_with_x(time,status,*n_time);
 	
@@ -346,7 +346,7 @@ void My_matprod(double *x, int nrx, int ncx, double *y, int nry, int ncy, double
 				}
 		} else
 			F77_CALL(dgemm)(transa, transb, &nrx, &ncy, &ncx, &one,
-							x, &nrx, y, &nry, &zero, z, &nrx);
+							x, &nrx, y, &nry, &zero, z, &nrx FCONE FCONE);
     } else /* zero-extent operations should return zeroes */
 		for(i = 0; i < nrx*ncy; i++) z[i] = 0;
 }
@@ -362,7 +362,7 @@ void survM_tcrossprod(double *x, int nrx, int ncx,
     double one = 1.0, zero = 0.0;
     if (nrx > 0 && ncx > 0 && nry > 0 && ncy > 0) {
 		F77_CALL(dgemm)(transa, transb, &nrx, &nry, &ncx, &one,
-						x, &nrx, y, &nry, &zero, z, &nrx);
+						x, &nrx, y, &nry, &zero, z, &nrx FCONE FCONE);
     } else { /* zero-extent operations should return zeroes */
 		int i;
 		for(i = 0; i < nrx*nry; i++) z[i] = 0;
@@ -372,7 +372,7 @@ void survM_tcrossprod(double *x, int nrx, int ncx,
 
 
 
-SEXP survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW)
+SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW)
 {
 	int *n_time = INTEGER(N_TIME);
 	int *n_lp = INTEGER(N_LP);

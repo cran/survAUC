@@ -14,7 +14,7 @@
 
 
 
-void Hung_Chiang(double *time, int *n_time, double *stime, double *event, int *n_stime,
+void C_Hung_Chiang(double *time, int *n_time, double *stime, double *event, int *n_stime,
 				 double *stime_new, double *event_new, int *n_stime_new,
 				 double *lpnew, int *n_lpnew, double *ans, double *i_auc)
 {
@@ -39,13 +39,13 @@ void Hung_Chiang(double *time, int *n_time, double *stime, double *event, int *n
 		Sc_event[i] = 1.0 - event[i];
 	}
 	
-	km_Daim(St, stime, event, n_stime);
+	C_km_Daim(St, stime, event, n_stime);
 	step_eval2(Sta, time, St, stime, *n_time, *n_stime);
 	
-	km_Daim(SX, stime, tmp_status, n_stime);
+	C_km_Daim(SX, stime, tmp_status, n_stime);
 	step_eval2(SXa, time, SX, stime, *n_time, *n_stime);
 	
-	km_Daim(Sc, Sc_stime, Sc_event, n_stime);
+	C_km_Daim(Sc, Sc_stime, Sc_event, n_stime);
 	step_eval2(Sca, stime_new, Sc, Sc_stime, *n_stime_new, *n_stime);
 
 	/* Calculation of AUC */
@@ -72,7 +72,7 @@ void Hung_Chiang(double *time, int *n_time, double *stime, double *event, int *n
 	S_new = Calloc(*n_stime_new, double);
 	S = Calloc(*n_time, double);
 	
-	km_Daim(S_new, stime_new, event_new, n_stime_new);
+	C_km_Daim(S_new, stime_new, event_new, n_stime_new);
 	step_eval2(S, time, S_new, stime_new, *n_time,  *n_stime_new);
 	
 	f[0] = 1.0 - S[0];

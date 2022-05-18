@@ -24,13 +24,14 @@ seval <- function(x,y,z){
 	n_x <- length(x)
 	n_z <- length(z)
 	xz_new <- rep(0,n_x) 
-	ans <- .C("step_eval_R",
+	ans <- .C("C_step_eval_R",
 			  as.numeric(xz_new),
 			  as.numeric(z), 
 			  as.numeric(x), 
 			  as.numeric(y), 
 			  as.integer(n_z),
-			  as.integer(n_x),
-			  PACKAGE="survAUC")
+			  as.integer(n_x))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans[[1]]
 }

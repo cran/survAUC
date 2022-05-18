@@ -10,12 +10,13 @@
 
 KM <- function(Stime, status){
 	n_time <- length(Stime)
-	km <- .C("km_Daim", 
+	km <- .C("C_km_Daim", 
 			 vector("numeric", length(Stime)), 
 			 as.numeric(Stime), 
 			 as.numeric(status), 
-			 as.integer(n_time),
-			 PACKAGE="survAUC")
+			 as.integer(n_time))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	names(km) <- c("survival","times","status","n")
 	km[-4]
 }
@@ -37,14 +38,15 @@ weightKM <- function(Stime, status, wt=NULL, entry=NULL ){
 		entry <- vector("numeric",n_time)
 	if( is.null(wt) ) 
 		wt <- vector("numeric",n_time)+1
-	km <- .C("km_weight", 
+	km <- .C("C_km_weight", 
 			 vector("numeric", n_time), 
 			 as.numeric(Stime), 
 			 as.numeric(status), 
 			 as.numeric(wt),
 			 as.numeric(entry),
-			 as.integer(n_time),
-			 PACKAGE="survAUC")
+			 as.integer(n_time))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	names(km) <- c("survival","times","status","weights","entry","n")
 	km[-6]
 }
@@ -65,14 +67,15 @@ cox_weights <- function(marker, time, status, thresh, entry=NULL){
 	n_time <- length(time)
 	if( is.null(entry) )  
 		entry <- vector("numeric",n_time)
-	ans <- .C("cox_weights", 
+	ans <- .C("C_cox_weights", 
 			 as.numeric(marker), 
 			 as.numeric(time), 
 			 as.integer(status), 
 			 as.numeric(thresh),
 			 as.numeric(0),
-			 as.integer(n_time),
-			 PACKAGE="survAUC")
+			 as.integer(n_time))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	names(ans) <- c("marker","time","status","thresh","AUC","n")
 	ans[-6]
 }

@@ -9,11 +9,12 @@
 
 
 GHCI <- function(lpnew){
-	ans <- .C("GHCI",
+	ans <- .C("C_GHCI",
 			  as.numeric(lpnew),
 			  as.integer(length(lpnew)),
-			  as.numeric(0.0),
-			  PACKAGE="survAUC")
+			  as.numeric(0.0))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans[[3]]
 }
 
@@ -57,7 +58,7 @@ predErr <- function(Surv.rsp, Surv.rsp.new, lp, lpnew, times,
 	n.lp <- length(lp)
 	n.lpnew <- length(lpnew)
 	
-	erg <- .Call("predError",
+	erg <- .Call("C_predError",
 				 as.numeric(stime),
 				 as.numeric(event),
 				 as.integer(n.stime),
@@ -71,8 +72,9 @@ predErr <- function(Surv.rsp, Surv.rsp.new, lp, lpnew, times,
 				 as.numeric(lpnew),
 				 as.integer(n.lpnew),
 				 as.integer(type-1),
-				 as.integer(int.type-1),
-				 PACKAGE="survAUC")
+				 as.integer(int.type-1))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	class(erg) <- "survErr"
 	erg
 }
@@ -139,14 +141,15 @@ XO <- function(Surv.rsp, lp, lp0){
 	n_lp0 <- length(lp0)
 	if(n != n_lp || n_lp != n_lp0 || n != n_lp0)
 		stop(" 'Surv.rsp', 'linear predictors' and 'linear predictors of null-model' must have the same length!\n")
-	ans <- .C("XO",
+	ans <- .C("C_XO",
 			  as.numeric(time),
 			  as.numeric(event),
 			  as.integer(n), 
 			  as.numeric(lp),
 			  as.numeric(lp0),
-			  as.numeric(0),
-			  PACKAGE="survAUC")
+			  as.numeric(0))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans[[6]]
 }
 

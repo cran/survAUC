@@ -26,7 +26,7 @@
  */
 
 
-void spec_uno( double *spec, double *thres, double *t, double *marker, double *new_data, int *n_th, int *n_t, int *n_new_data ){
+void C_spec_uno( double *spec, double *thres, double *t, double *marker, double *new_data, int *n_th, int *n_t, int *n_new_data ){
 	
 	int k, i, j;
 	double Ivec_zsp, Ivec_nsp;
@@ -64,19 +64,19 @@ void spec_uno( double *spec, double *thres, double *t, double *marker, double *n
  */
 
 
-void sens_uno( double *sens, double *surv_time, double *status, double *thres, double *t, 
+void C_sens_uno( double *sens, double *surv_time, double *status, double *thres, double *t, 
 			  double *marker, double *new_surv, double *new_event, int *n_th, int *n_t, 
 			  int *n_new_data, int *n_surv )
 {
 	
 	int k, i, j;
 	double Ivec_zse, Ivec_nse;
-	double tmp_Ivec_nse=0.0;
+/*	double tmp_Ivec_nse=0.0;*/
 	rsort_with_x(surv_time,status,*n_surv);
 	
 	double *S;
 	S = Calloc(*n_surv, double);
-	km_Daim(S, surv_time, status, n_surv);
+	C_km_Daim(S, surv_time, status, n_surv);
 	
 	double *G;
 	G = Calloc(*n_new_data, double);
@@ -121,7 +121,7 @@ void sens_uno( double *sens, double *surv_time, double *status, double *thres, d
  */
 
 
-void auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *surv_time,
+void C_auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *surv_time,
 			 double *status, double *thres, double *t, double *marker, double *new_surv_t,
 			 double *new_event, int *n_th, int *n_t, int *n_new_data, int *n_surv)
 {
@@ -134,7 +134,7 @@ void auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *su
 
 	double *SProb;
 	SProb = Calloc(*n_surv, double);
-	km_Daim(SProb, surv_time, status, n_surv);
+	C_km_Daim(SProb, surv_time, status, n_surv);
 	
 	double *G;
 	G = Calloc(*n_new_data, double);
@@ -188,7 +188,7 @@ void auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *su
 	f = Calloc(*n_t, double);
 	S_new = Calloc(*n_new_data, double);
 	S = Calloc(*n_t, double);
-	km_Daim(S_new, new_surv_t, new_event, n_new_data);
+	C_km_Daim(S_new, new_surv_t, new_event, n_new_data);
 	step_eval2(S, t, S_new, new_surv_t, *n_t, *n_new_data);
 	
 	f[0] = 1.0 - S[0];
@@ -237,7 +237,7 @@ void auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *su
 
 
 
-void int_auc( double *i_auc, double *auc, double *time, double *S, 
+void C_int_auc( double *i_auc, double *auc, double *time, double *S, 
 			 double *tmax, int *n_S, int *maxI, 
 			 double *maxS, int *Con_Inc)
 {

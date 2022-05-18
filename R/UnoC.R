@@ -33,7 +33,7 @@ UnoC <- function(Surv.rsp, Surv.rsp.new, lpnew, time = NULL)
 	}else{
 		UnoC <- 0
 	}
-	ans <- .C("UnoC",
+	ans <- .C("C_UnoC",
 			  as.numeric(time),
 			  as.numeric(event),
 			  as.integer(n),
@@ -43,8 +43,9 @@ UnoC <- function(Surv.rsp, Surv.rsp.new, lpnew, time = NULL)
 			  as.numeric(lpnew),
 			  as.numeric(tau),
 			  as.integer(n_tau),
-			  as.numeric(UnoC),
-			  PACKAGE="survAUC")
+			  as.numeric(UnoC))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans[[10]]
 }
 

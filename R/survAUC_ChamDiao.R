@@ -27,7 +27,7 @@ AUC.cd <- function(Surv.rsp, Surv.rsp.new = NULL, lp, lpnew, times)
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	erg <- .Call("Cham_Diao",
+	erg <- .Call("C_Cham_Diao",
 				 as.numeric(lp),
 				 as.numeric(times),
 				 as.numeric(stime),
@@ -38,8 +38,9 @@ AUC.cd <- function(Surv.rsp, Surv.rsp.new = NULL, lp, lpnew, times)
 				 as.integer(length(stime.new)),
 				 as.integer(n_lp),
 				 as.numeric(lpnew),
-				 as.integer(n_lpnew),
-				 PACKAGE="survAUC")
+				 as.integer(n_lpnew))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	class(erg) <- "survAUC"
 	erg
 }

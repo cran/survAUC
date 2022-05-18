@@ -23,7 +23,7 @@ sens.sh <- function(Surv.rsp, lp, lpnew, times, type="incident"){
 	if(is.na(type_sens))
 		stop("\nThe value of 'type' must be one of 'incident' or 'cumulative'\n")
 	
-	ans <- .Call("sens_SZ",
+	ans <- .Call("C_sens_SZ",
 				 as.numeric(unique(sort(lpnew))),
 				 as.numeric(times),
 				 as.numeric(stime),
@@ -33,8 +33,9 @@ sens.sh <- function(Surv.rsp, lp, lpnew, times, type="incident"){
 				 as.integer(n_lp),
 				 as.numeric(lpnew),
 				 as.integer(n_lpnew),
-				 as.logical(type_sens-1),
-				 PACKAGE="survAUC")
+				 as.logical(type_sens-1))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans
 }
 
@@ -62,7 +63,7 @@ spec.sh <- function(Surv.rsp, lp, lpnew, times){
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	ans <- .Call("spez_SZ",
+	ans <- .Call("C_spec_SZ",
 				 as.numeric(unique(sort(lpnew))),
 				 as.numeric(times),
 				 as.numeric(stime),
@@ -71,8 +72,9 @@ spec.sh <- function(Surv.rsp, lp, lpnew, times){
 				 as.numeric(lp),
 				 as.integer(n_lp),
 				 as.numeric(lpnew),
-				 as.integer(n_lpnew),
-				 PACKAGE="survAUC")
+				 as.integer(n_lpnew))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans
 }
 
@@ -112,7 +114,7 @@ AUC.sh <- function(Surv.rsp, Surv.rsp.new=NULL, lp, lpnew, times, type="incident
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	ans <- .Call("auc_SZ",
+	ans <- .Call("C_auc_SZ",
 				 as.numeric(unique(sort(lpnew))),
 				 as.numeric(times),
 				 as.numeric(stime),
@@ -125,8 +127,9 @@ AUC.sh <- function(Surv.rsp, Surv.rsp.new=NULL, lp, lpnew, times, type="incident
 				 as.integer(n_lp),
 				 as.numeric(lpnew),
 				 as.integer(n_lpnew),
-				 as.logical(type_sens-1),
-				 PACKAGE="survAUC")
+				 as.logical(type_sens-1))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	if(!savesensspec){
 		erg <- list(auc=ans[[1]], times=ans[[2]], iauc=ans[[5]])
 	}else{

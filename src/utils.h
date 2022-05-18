@@ -56,7 +56,7 @@
 double dmax(double *X, int n);
 double dmin(double *X, int n);
 double d_mean(double *X, int n);
-void step_eval_R(double *s_new, double *t_new, double *s, double *t, int *n_new, int *n);
+void C_step_eval_R(double *s_new, double *t_new, double *s, double *t, int *n_new, int *n);
 void step_eval2(double *s_new, double *t_new, double *s, double *t, int n_new, int n);
 void step_eval2_left(double *s_new, double *t_new, double *s, double *t, int n_new, int n);
 void step_eval3(double *s_new, double *t_new, double *s, double *t, int n_new, int n_s, int n_t);
@@ -64,13 +64,13 @@ void rsort_with_x(double *x, double *indx, int n);
 void rsort_index(double *x, int *indx, int n);
 void rsort_xyz(double *x, double *y, double *indx, int n);
 void rsort_xyzv(double *x, double *y, double *z, double *indx, int n);
-void km_weight( double *surv, double *time, double *status, double *wt, double *entry, int *n_time);
-void km_Daim( double *surv, double *time, double *status, int *n_time);
+void C_km_weight( double *surv, double *time, double *status, double *wt, double *entry, int *n_time);
+void C_km_Daim( double *surv, double *time, double *status, int *n_time);
 void cum_sum(double *x, int size);
 void my_rev_d(double *x, int *n_x);
 void survM_tcrossprod(double *x, int nrx, int ncx, double *y, int nry, int ncy, double *z);
 void My_matprod(double *x, int nrx, int ncx, double *y, int nry, int ncy, double *z);
-SEXP survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW);
+SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW);
 
 
 

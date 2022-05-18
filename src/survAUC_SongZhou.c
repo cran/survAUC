@@ -29,7 +29,7 @@
  */
 
 
-SEXP sens_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP, 
+SEXP C_sens_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP, 
 			 SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW, SEXP TYPE_SENS)
 {
 	int nrx, ncx, i, j, k;
@@ -41,7 +41,7 @@ SEXP sens_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 		lp_new[i] = REAL(LPNEW)[i];
 	}
 	
-	PROTECT(S1a = survfit_cox(LP, STIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
+	PROTECT(S1a = C_survfit_cox(LP, STIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
 	xdims = getAttrib(VECTOR_ELT(S1a,0), R_DimSymbol);
 	nrx = INTEGER(xdims)[0];
 	ncx = INTEGER(xdims)[1];
@@ -112,7 +112,7 @@ SEXP sens_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 
 
 
-SEXP spez_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP, 
+SEXP C_spec_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP, 
 			 SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW)
 {
 	int nrx, ncx, i, j, k;
@@ -124,7 +124,7 @@ SEXP spez_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 		lp_new[i] = REAL(LPNEW)[i];
 	}
 	
-	PROTECT(S1a = survfit_cox(LP, STIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
+	PROTECT(S1a = C_survfit_cox(LP, STIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
 	xdims = getAttrib(VECTOR_ELT(S1a,0), R_DimSymbol);
 	nrx = INTEGER(xdims)[0];
 	ncx = INTEGER(xdims)[1];
@@ -165,7 +165,7 @@ SEXP spez_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, SEXP LP,
 
 
 
-SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, 
+SEXP C_auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME, 
 			SEXP STIME_NEW, SEXP EVENT_NEW, SEXP N_TIME_NEW, 
 			SEXP LP, SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW, SEXP TYPE_SENS)
 {
@@ -178,7 +178,7 @@ SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME,
 		lp_new[i] = REAL(LPNEW)[i];
 	}
 	
-	PROTECT(S1a = survfit_cox(LP, STIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
+	PROTECT(S1a = C_survfit_cox(LP, STIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
 	xdims = getAttrib(VECTOR_ELT(S1a,0), R_DimSymbol);
 	nrx = INTEGER(xdims)[0];
 	ncx = INTEGER(xdims)[1];
@@ -282,7 +282,7 @@ SEXP auc_SZ(SEXP THRESH, SEXP T, SEXP STIME, SEXP EVENT, SEXP N_TIME,
 	f = Calloc(N_times, double);
 	S_new = Calloc(n_new_data, double);
 	S = Calloc(N_times, double);
-	km_Daim(S_new, REAL(STIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
+	C_km_Daim(S_new, REAL(STIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
 	step_eval2(S, REAL(T), S_new, REAL(STIME_NEW), N_times, n_new_data);
 	
 	f[0] = 1.0 - S[0];

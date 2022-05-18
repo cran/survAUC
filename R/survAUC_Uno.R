@@ -10,7 +10,7 @@ sens.uno <- function(Surv.rsp, Surv.rsp.new, lpnew, times){
 	thresh <- my.sort(unique(lpnew))
 	n_th <- length(thresh)
 	n_t <- length(times)
-	ERG <- .C("sens_uno",
+	ERG <- .C("C_sens_uno",
 			  as.numeric(rep(1, n_t*(n_th+1))),
 			  as.numeric(Surv.rsp[,1]),
 			  as.numeric((1-Surv.rsp[,2])),
@@ -22,8 +22,9 @@ sens.uno <- function(Surv.rsp, Surv.rsp.new, lpnew, times){
 			  as.integer(n_th),
 			  as.integer(n_t),
 			  as.integer(dim(Surv.rsp.new)[1]),
-			  as.integer(dim(Surv.rsp)[1]),
-			  PACKAGE="survAUC")
+			  as.integer(dim(Surv.rsp)[1]))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	matrix(ERG[[1]], n_t, n_th+1)
 }
 
@@ -39,7 +40,7 @@ spec.uno <- function(Surv.rsp.new, lpnew, times){
 	thresh <- my.sort(unique(lpnew))
 	n_th <- length(thresh)
 	n_t <- length(times)
-	ERG <- .C("spec_uno", 
+	ERG <- .C("C_spec_uno", 
 			  as.numeric(rep(0, n_t*(n_th+1))), 
 			  as.numeric(thresh), 
 			  as.numeric(times),
@@ -47,8 +48,9 @@ spec.uno <- function(Surv.rsp.new, lpnew, times){
 			  as.numeric(Surv.rsp.new[,1]), 
 			  as.integer(n_th),
 			  as.integer(n_t), 
-			  as.integer(dim(Surv.rsp.new)[1]),
-			  PACKAGE="survAUC")
+			  as.integer(dim(Surv.rsp.new)[1]))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	matrix(ERG[[1]], n_t, n_th+1)
 }
 
@@ -72,7 +74,7 @@ AUC.uno <- function(Surv.rsp, Surv.rsp.new, lpnew, times, savesensspec=FALSE){
 	n_t <- length(times)
 	
 	#### Sensetivity, Specificity and AUC.
-	auc.uno <- .C("auc_uno",
+	auc.uno <- .C("C_auc_uno",
 				  as.numeric(vector("numeric",length=n_t)),
 				  as.numeric(0),
 				  as.numeric(vector("numeric",length=n_t*(n_th+1))+1),
@@ -87,8 +89,9 @@ AUC.uno <- function(Surv.rsp, Surv.rsp.new, lpnew, times, savesensspec=FALSE){
 				  as.integer(n_th),
 				  as.integer(n_t), 
 				  as.integer(dim(Surv.rsp.new)[1]),
-				  as.integer(dim(Surv.rsp)[1]),
-				  PACKAGE="survAUC")
+				  as.integer(dim(Surv.rsp)[1]))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	if(!savesensspec){
 		erg <- list(auc=auc.uno[[1]], times=auc.uno[[8]], iauc=auc.uno[[2]])
 	}else{

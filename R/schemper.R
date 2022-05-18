@@ -63,25 +63,25 @@ schemper <- function(train.fit, traindata, newdata)
 		}
     tsurv <- as.numeric(newdata$time)
     surv  <- as.numeric(newdata$status)
-    lin.pred <- predict(train.fit, newdata,"lp")
+    lin.pred <- rms::predictrms(train.fit, newdata,"lp")
     num.sogg <- length(tsurv)
-    km <- survfit(Surv(tsurv, surv) ~ 1)
-    km.fit <- survfit(Surv(time, status) ~ 1, data=traindata)
+    km <- survival::survfit(survival::Surv(tsurv, surv) ~ 1)
+    km.fit <- survival::survfit(survival::Surv(time, status) ~ 1, data=traindata)
     tempi.eventi <- km$time[km$n.event != 0]
     pos.surv <- apply(as.matrix(tsurv), 1, f.assegna.surv, tempi.eventi)
-    surv.tj <- approx(km.fit$time,km.fit$surv,xout =tempi.eventi , method = "constant", f = 0, yleft=1,yright=min(km.fit$surv, na.rm=T))$y
+    surv.tj <- stats::approx(km.fit$time,km.fit$surv,xout =tempi.eventi , method = "constant", f = 0, yleft=1,yright=min(km.fit$surv, na.rm=T))$y
     surv.tot.km <- (surv.tj)[pos.surv]
     ind.censura <- as.numeric(!as.logical(surv))
     Mt <- apply(as.matrix(tempi.eventi), 1, f.Mt, tsurv, surv.tot.km,
 				tempi.eventi, surv.tj, ind.censura, num.sogg)
     numero.eventi <- km$n.event[km$n.event != 0]
-    surv0.tj.cox <- approx(train.fit$time,train.fit$surv,xout =tempi.eventi , method = "constant", f = 0, yleft=1,yright=min(km.fit$surv, na.rm=T))$y
+    surv0.tj.cox <- stats::approx(train.fit$time,train.fit$surv,xout =tempi.eventi , method = "constant", f = 0, yleft=1,yright=min(km.fit$surv, na.rm=T))$y
     surv0.tot.cox <- (surv0.tj.cox)[pos.surv]
     surv.tot.cox <- surv0.tot.cox^exp(lin.pred)
     Mtx <- apply(as.matrix(tempi.eventi), 1, f.Mt.cox, tsurv,
 				 surv.tot.cox, tempi.eventi, surv0.tj.cox, ind.censura,
 				 num.sogg, lin.pred)
-    Gkm <- survfit(Surv(tsurv, ind.censura) ~ 1)
+    Gkm <- survival::survfit(survival::Surv(tsurv, ind.censura) ~ 1)
     tempi.censure <- Gkm$time[Gkm$n.event != 0]
     if (!length(tempi.censure))
 	cens.tot.km <- rep(1, length(tempi.eventi))

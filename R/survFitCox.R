@@ -14,15 +14,16 @@ survFit.COX <- function(lp, response, lpnew)
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	ans <- .Call("survfit_cox", 
+	ans <- .Call("C_survfit_cox", 
 				 as.numeric(lp), 
 				 as.numeric(time), 
 				 as.numeric(event), 
 				 as.integer(n_time),
 				 as.integer(n_lp),
 				 as.numeric(lpnew),
-				 as.integer(n_lpnew),
-				 PACKAGE="survAUC")
+				 as.integer(n_lpnew))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans
 }
 
@@ -44,14 +45,15 @@ PartLCox <- function(Surv.rsp, lp){
 	if(n.lp == 1)
 	lp <- rep(lp,n.event)
 	
-	ans <- .C("partLCox",
+	ans <- .C("C_partLCox",
 			  as.numeric(stime),
 			  as.numeric(event),
 			  as.integer(n.event),
 			  as.numeric(lp),
 			  as.integer(n.lp),
-			  as.numeric(0),
-			  PACKAGE="survAUC")
+			  as.numeric(0))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans[[6]]
 }
 
@@ -110,13 +112,14 @@ censWeights <- function(Surv.rsp, Surv.rsp.new, times)
 
 PartLCoxIndiv <- function(stime, time, lp){
 	
-	ans <- .C("partLCoxIndiv",
+	ans <- .C("C_partLCoxIndiv",
 			  as.numeric(stime),
 			  as.numeric(time),
 			  as.integer(length(stime)),
 			  as.numeric(lp),
-			  as.numeric(rep(0,length(stime))),
-			  PACKAGE="survAUC")
+			  as.numeric(rep(0,length(stime))))
+	#No longer needed since the symbol is registered in the NAMESPACE
+	#          ,PACKAGE="survAUC")
 	ans
 }
 

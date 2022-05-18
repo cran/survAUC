@@ -47,17 +47,17 @@ hazards models.\cr \emph{Journal of Nonparametric Statistics} \bold{12}, 83--107
   \code{\link{predErr}}, \code{\link{schemper}}, \code{\link{GHCI}}
 }
 \examples{
-
+data(cancer,package="survival")
 TR <- ovarian[1:16,]
 TE <- ovarian[17:26,]
-train.fit  <- coxph(Surv(futime, fustat) ~ age,
+train.fit  <- survival::coxph(survival::Surv(futime, fustat) ~ age,
                     x=TRUE, y=TRUE, method="breslow", data=TR)
 
-model0 <- coxph(Surv(futime, fustat)~1, data=TR)
-model1 <- coxph(Surv(futime, fustat)~age, data=TR)
+model0 <- survival::coxph(survival::Surv(futime, fustat)~1, data=TR)
+model1 <- survival::coxph(survival::Surv(futime, fustat)~age, data=TR)
 f0 <- rep(0,nrow(TE))
 f1 <- predict(model1, newdata=TE)               
-Surv.res <- Surv(TE$futime, TE$fustat)
+Surv.res <- survival::Surv(TE$futime, TE$fustat)
 
 OXS(Surv.res, f1, f0)
 Nagelk(Surv.res, f1, f0)

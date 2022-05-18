@@ -1,1 +1,8 @@
-.First.lib <- function(lib, pkg) library.dynam("survAUC", pkg, lib)
+# Packgage library 
+.onLoad <- function(libname, pkgname) {
+  library.dynam("survAUC", pkgname, libname);
+}
+
+.onUnload <- function (libpath) {
+  library.dynam.unload("survAUC", libpath)
+} 

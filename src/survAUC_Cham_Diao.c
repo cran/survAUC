@@ -16,7 +16,7 @@
 #include "utils.h"
 
 
-SEXP Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME, 
+SEXP C_Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME, 
 			   SEXP TIME_NEW, SEXP EVENT_NEW, SEXP N_TIME_NEW, 
 			   SEXP N_LP, SEXP LPNEW, SEXP N_LPNEW)
 {
@@ -24,7 +24,7 @@ SEXP Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	SEXP xdims, surv, time, S1a;
 	int i, j, k, N_th_times, nrx, ncx;
 	
-	PROTECT(S1a = survfit_cox(LP, TIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
+	PROTECT(S1a = C_survfit_cox(LP, TIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
 	xdims = getAttrib(VECTOR_ELT(S1a,0), R_DimSymbol);
 	nrx = INTEGER(xdims)[0];
 	ncx = INTEGER(xdims)[1];
@@ -84,7 +84,7 @@ SEXP Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 		f = Calloc(N_th_times, double);
 		S_new = Calloc(n_new_data, double);
 		S = Calloc(N_th_times, double);
-		km_Daim(S_new, REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
+		C_km_Daim(S_new, REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
 		step_eval2(S, REAL(TH_TIME), S_new, REAL(TIME_NEW), N_th_times, n_new_data);
 		
 		f[0] = 1.0 - S[0];

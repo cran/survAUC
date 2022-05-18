@@ -63,16 +63,16 @@ native to the Schemper-Henderson estimator of prediction error.\cr \emph{Biometr
   \code{\link{IntAUC}}, \code{\link{OXS}}, \code{\link{schemper}}
 }
 \examples{
-
+data(cancer,package="survival")
 TR <- ovarian[1:16,]
 TE <- ovarian[17:26,]
-train.fit  <- coxph(Surv(futime, fustat) ~ age, x=TRUE, y=TRUE, 
+train.fit  <- survival::coxph(survival::Surv(futime, fustat) ~ age, x=TRUE, y=TRUE, 
                     method="breslow", data=TR)
 
 lp <- predict(train.fit)
 lpnew <- predict(train.fit, newdata=TE)
-Surv.rsp <- Surv(TR$futime, TR$fustat)
-Surv.rsp.new <- Surv(TE$futime, TE$fustat)
+Surv.rsp <- survival::Surv(TR$futime, TR$fustat)
+Surv.rsp.new <- survival::Surv(TE$futime, TE$fustat)
 times <- 1:500                  
 
 predErr(Surv.rsp, Surv.rsp.new, lp, lpnew, times, 

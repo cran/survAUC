@@ -16,7 +16,7 @@
 #include "utils.h"
 
 /*  Calculation of Gonen and Hellers Concordance Index for Cox models */
-void GHCI(double *lp, int *n_lp, double *ans){
+void C_GHCI(double *lp, int *n_lp, double *ans){
 	int i,j;
 	double temp_m = 0.;
 	double K = 0.;
@@ -46,7 +46,7 @@ void cens_weights(double *times, int *n_times, double *stime, double *event, int
 	/* Calculation of Kaplan-Maier */
 	double *surv;
 	surv = Calloc(*n_stime, double);
-	km_Daim(surv, stime, event, n_stime);
+	C_km_Daim(surv, stime, event, n_stime);
 
 	/* Calculation of survival for test data time points */
 	double *W_1_2;
@@ -75,7 +75,7 @@ void cens_weights(double *times, int *n_times, double *stime, double *event, int
 
 
 /* Calculation of 'Prediction Error Curve': brier & robust */
-SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME, 
+SEXP C_predError(SEXP TIME, SEXP EVENT, SEXP N_TIME, 
 			   SEXP TIME_NEW, SEXP EVENT_NEW, SEXP N_TIME_NEW, 
 			   SEXP TH_TIME, SEXP N_TH_TIME, SEXP LP, SEXP N_LP, 
 			   SEXP LPNEW, SEXP N_LPNEW, SEXP TYPE, SEXP INTEG)
@@ -83,7 +83,7 @@ SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	SEXP xdims, S1a, ERR;
 	int i, j, nrx, ncx;
 	
-	PROTECT(S1a = survfit_cox(LP, TIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
+	PROTECT(S1a = C_survfit_cox(LP, TIME, EVENT, N_TIME, N_LP, LPNEW, N_LPNEW));
 	xdims = getAttrib(VECTOR_ELT(S1a,0), R_DimSymbol);
 	nrx = INTEGER(xdims)[0];
 	ncx = INTEGER(xdims)[1];
@@ -155,7 +155,7 @@ SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 		f = Calloc(N_th_times, double);
 		S_new = Calloc(n_new_data, double);
 		S = Calloc(N_th_times, double);
-		km_Daim(S_new, REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
+		C_km_Daim(S_new, REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
 		step_eval2(S, REAL(TH_TIME), S_new, REAL(TIME_NEW), N_th_times, n_new_data);
 		
 		f[0] = 1.0 - S[0];
@@ -195,7 +195,7 @@ SEXP predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 
 
 /* Calculation of 'Partial Likelihood Cox-Model */
-void partLCox(double *time, double *event, int *n_time, double *lp, int *n_lp, double *LL)
+void C_partLCox(double *time, double *event, int *n_time, double *lp, int *n_lp, double *LL)
 {
 	int i,j;
 	double tmp_risk;
@@ -241,7 +241,7 @@ void partLCox(double *time, double *event, int *n_time, double *lp, int *n_lp, d
 
 
 /* Calculation of 'Partial Likelihood Indiv */
-void partLCoxIndiv(double *stime, double *time, int *n_stime, double *lp, double *LL){
+void C_partLCoxIndiv(double *stime, double *time, int *n_stime, double *lp, double *LL){
 	int i;
 	double nen = 0.0;
 	for(i=0; i < *n_stime; i++){
@@ -261,7 +261,7 @@ void partLCoxIndiv(double *stime, double *time, int *n_stime, double *lp, double
 
 
 /* Calculation of 'XO' measure */
-void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, double *XO)
+void C_XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, double *XO)
 {
 	int i,j;
 	double *sF;
@@ -275,8 +275,8 @@ void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, dou
 	
 	double tmp_sum;
 	for(i=0; i<*n_stime; i++){
-		partLCoxIndiv(stime, &stime[i], n_stime, lp, pijbeta);
-		partLCoxIndiv(stime, &stime[i], n_stime, lp0, pij0);
+		C_partLCoxIndiv(stime, &stime[i], n_stime, lp, pijbeta);
+		C_partLCoxIndiv(stime, &stime[i], n_stime, lp0, pij0);
 		tmp_sum=0.;
 		for(j=0; j<*n_stime; j++){
 			if(pij0[j] > 0.){
@@ -288,7 +288,7 @@ void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, dou
 	Free(pijbeta);Free(pij0);
 	double *surv;
 	surv = Calloc(*n_stime, double);
-	km_Daim(surv, stime, event, n_stime);
+	C_km_Daim(surv, stime, event, n_stime);
 	
 	for(i=*n_stime-1; i>0; i--){
 		surv[i] = surv[i-1] - surv[i];
@@ -311,12 +311,12 @@ void XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, dou
 
 /* Calculation of 'C-Statistic' suggest by Uno */
 
-void UnoC(double *stime, double *event, int *n_stime, double *new_stime, double *new_event, int *new_n_stime,
+void C_UnoC(double *stime, double *event, int *n_stime, double *new_stime, double *new_event, int *new_n_stime,
 		  double *lp, double *tau, int *n_tau, double *CStat)
 {
 	double *surv;
 	surv = Calloc(*n_stime, double);
-	km_Daim(surv, stime, event, n_stime);
+	C_km_Daim(surv, stime, event, n_stime);
 	
 	double *G;
 	G = Calloc(*new_n_stime, double);
@@ -367,7 +367,7 @@ void UnoC(double *stime, double *event, int *n_stime, double *new_stime, double 
 
 /* Calculation of 'C-Statistic' suggest by Begg */
 
-void c_begg(double *new_stime, double *new_event, int *new_n_stime,
+void C_begg(double *new_stime, double *new_event, int *new_n_stime,
 			  double *times, int *n_times, double *lp, double *lpnew, 
 			  double *surv_prob, double *surv_times, int *n_surv_times, double *CStat)
 {

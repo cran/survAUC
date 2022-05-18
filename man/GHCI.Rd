@@ -49,10 +49,10 @@ power in proportional hazards regression.\cr \emph{Biometrika}
   \code{\link{AUC.sh}}, \code{\link{IntAUC}}
 }
 \examples{
-
+data(cancer,package="survival")
 TR <- ovarian[1:16,]
 TE <- ovarian[17:26,]
-train.fit  <- coxph(Surv(futime, fustat) ~ age,
+train.fit  <- survival::coxph(survival::Surv(futime, fustat) ~ age,
                     x=TRUE, y=TRUE, method="breslow", data=TR)
 
 lpnew <- predict(train.fit, newdata=TE)

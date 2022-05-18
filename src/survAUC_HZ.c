@@ -15,7 +15,7 @@
 
 #include "utils.h"
 
-void cox_weights (double *eta, double *time, int *status, double *target, double *AUC, int *N_st)
+void C_cox_weights (double *eta, double *time, int *status, double *target, double *AUC, int *N_st)
 {
 	int i, j=0, n=0, n_dead=0;
 	LDOUBLE sum_e_eta=0.0;
