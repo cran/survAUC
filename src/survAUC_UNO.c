@@ -234,14 +234,11 @@ void C_auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *
   */
 
 
-
-
-
-void C_int_auc( double *i_auc, double *auc, double *time, double *S, 
+void C_int_auc(double *auc, double *time, double *S, 
 			 double *tmax, int *n_S, int *maxI, 
-			 double *maxS, int *Con_Inc)
+			 double *maxS, int *Con_Inc, double *i_auc)
 {
-
+/*  PROTECT(IntAUC = allocVector(REALSXP,1));*/
 	int i;
 	double *f;
 	f = Calloc(*n_S, double);
@@ -273,6 +270,7 @@ void C_int_auc( double *i_auc, double *auc, double *time, double *S,
 		}
 	}
 	Free(f);
+	/*  REAL(IntAUC)[0] = i_auc;*/
 }
 
 

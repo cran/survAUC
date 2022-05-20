@@ -9,4 +9,6 @@ useDynLib(survAUC)
 
 importFrom("graphics", "lines")
 importFrom("stats", "approx", "predict")
+importFrom("rms", "cph", "predictrms")
+importFrom("survival", "Surv", "coxph","survfit")
 

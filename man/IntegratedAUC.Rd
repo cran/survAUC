@@ -60,3 +60,20 @@ ROC curves.\cr \emph{Biometrics} \bold{61}, 92--105.\cr
 }
 
 \keyword{classif} \keyword{manip}
+\examples{
+data(cancer,package="survival")
+TR <- ovarian[1:16,]
+TE <- ovarian[17:26,]
+train.fit  <- survival::coxph(survival::Surv(futime, fustat) ~ age,
+                              x=TRUE, y=TRUE, method="breslow", data=TR)
+
+lp <- predict(train.fit)
+lpnew <- predict(train.fit, newdata=TE)
+Surv.rsp <- survival::Surv(TR$futime, TR$fustat)
+Surv.rsp.new <- survival::Surv(TE$futime, TE$fustat)
+times <- seq(10, 1000, 10)                  
+
+
+AUC_CD <- AUC.cd(Surv.rsp, Surv.rsp.new, lp, lpnew, times)
+IntAUC(AUC_CD$auc, AUC_CD$times, runif(length(times),0,1), median(times), auc.type="cumulative")
+}

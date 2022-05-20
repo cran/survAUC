@@ -39,11 +39,11 @@ static R_NativePrimitiveArgType C_UnoC_t[] = {
   REALSXP, REALSXP, INTSXP, REALSXP, REALSXP, INTSXP, REALSXP, REALSXP, INTSXP, REALSXP
 };
 
-static R_NativePrimitiveArgType C_sens_uno_t[] = {
+static R_NativePrimitiveArgType C_spec_uno_t[] = {
   REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, INTSXP, INTSXP, INTSXP
 };
 
-static R_NativePrimitiveArgType C_spec_uno_t[] = {
+static R_NativePrimitiveArgType C_sens_uno_t[] = {
   REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, INTSXP, INTSXP, INTSXP, INTSXP
 };
 
@@ -52,7 +52,7 @@ static R_NativePrimitiveArgType C_auc_uno_t[] = {
 };
 
 static R_NativePrimitiveArgType C_int_auc_t[] = {
-  REALSXP, REALSXP, REALSXP, REALSXP, REALSXP, INTSXP, INTSXP, INTSXP, REALSXP, INTSXP
+  REALSXP, REALSXP, REALSXP, REALSXP, INTSXP, INTSXP, REALSXP, INTSXP, REALSXP
 };
 
 static R_NativePrimitiveArgType C_Hung_Chiang_t[] = {

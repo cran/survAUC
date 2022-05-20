@@ -10,7 +10,7 @@
 
 
 
-IntAUC <- function( AUC, times, S, tmax, auc.type="cumulative")
+IntAUC <- function(AUC, times, S, tmax, auc.type="cumulative")
 {
 	n_S <- length(S)
 	n_AUC <- length(AUC)
@@ -22,7 +22,7 @@ IntAUC <- function( AUC, times, S, tmax, auc.type="cumulative")
 		stop("auc.type must be one of 'cumulative' or 'incident'")
 	maxI <- sum( times <= tmax )
 	ind_S <- S[min(maxI+1,length(S))]
-	iAUC <- .C("C_int_auc",0.0,
+	iAUC <- .C("C_int_auc",
 			   as.numeric(AUC),
 			   as.numeric(times),
 			   as.numeric(S),
@@ -30,9 +30,10 @@ IntAUC <- function( AUC, times, S, tmax, auc.type="cumulative")
 			   as.integer(n_S),
 			   as.integer(maxI),
 			   as.numeric(ind_S),
-			   as.integer(auc.type-1))
+			   as.integer(auc.type-1),
+			   as.numeric(0))
 	#No longer needed since the symbol is registered in the NAMESPACE
 	#          ,PACKAGE="survAUC")
-	iAUC[[1]]
+	iAUC[[9]]
 }
 

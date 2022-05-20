@@ -308,11 +308,11 @@ void C_XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, d
 
 
 
-
 /* Calculation of 'C-Statistic' suggest by Uno */
 
-void C_UnoC(double *stime, double *event, int *n_stime, double *new_stime, double *new_event, int *new_n_stime,
-		  double *lp, double *tau, int *n_tau, double *CStat)
+void C_UnoC(double *stime, double *event, int *n_stime, double *new_stime, 
+            double *new_event, int *new_n_stime, double *lp, double *tau, 
+            int *n_tau, double *CStat)
 {
 	double *surv;
 	surv = Calloc(*n_stime, double);
