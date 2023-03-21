@@ -9,7 +9,7 @@
 
 
 GHCI <- function(lpnew){
-	ans <- .C("C_GHCI",
+	ans <- .C(`C_GHCI`,
 			  as.numeric(lpnew),
 			  as.integer(length(lpnew)),
 			  as.numeric(0.0))
@@ -58,7 +58,7 @@ predErr <- function(Surv.rsp, Surv.rsp.new, lp, lpnew, times,
 	n.lp <- length(lp)
 	n.lpnew <- length(lpnew)
 	
-	erg <- .Call("C_predError",
+	erg <- .Call(`C_predError`,
 				 as.numeric(stime),
 				 as.numeric(event),
 				 as.integer(n.stime),
@@ -141,7 +141,7 @@ XO <- function(Surv.rsp, lp, lp0){
 	n_lp0 <- length(lp0)
 	if(n != n_lp || n_lp != n_lp0 || n != n_lp0)
 		stop(" 'Surv.rsp', 'linear predictors' and 'linear predictors of null-model' must have the same length!\n")
-	ans <- .C("C_XO",
+	ans <- .C(`C_XO`,
 			  as.numeric(time),
 			  as.numeric(event),
 			  as.integer(n), 

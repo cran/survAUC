@@ -1,3 +1,7 @@
+# survAUC 1.2-0
+
+* Fix code to use native symbols as requested by CRAN.
+
 # survAUC 1.1-1
 
 * Package memory allocation error fixed and code updates as requested by CRAN.

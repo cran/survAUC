@@ -31,7 +31,7 @@ BeggC <- function(Surv.rsp, Surv.rsp.new, lp, lpnew){
 		stop(" 'Surv.rsp.new' and 'linear predictors new' must have the same length!\n")
 
 	#### Cox survival function estimates for lpnew	
-	surv.cox <- .Call("C_survfit_cox",
+	surv.cox <- .Call(`C_survfit_cox`,
 					  as.numeric(lp), 
 					  as.numeric(stime),
 					  as.numeric(event), 
@@ -42,7 +42,7 @@ BeggC <- function(Surv.rsp, Surv.rsp.new, lp, lpnew){
 	#No longer needed since the symbol is registered in the NAMESPACE
 	#          ,PACKAGE="survAUC")
 	#### C-Statistic
-	c.begg <- .C("C_begg",
+	c.begg <- .C(`C_begg`,
 				   as.numeric(stime.new), 
 				   as.numeric(event.new),
 				   as.integer(n_stime_new),

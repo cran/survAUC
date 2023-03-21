@@ -10,7 +10,7 @@ sens.uno <- function(Surv.rsp, Surv.rsp.new, lpnew, times){
 	thresh <- my.sort(unique(lpnew))
 	n_th <- length(thresh)
 	n_t <- length(times)
-	ERG <- .C("C_sens_uno",
+	ERG <- .C(`C_sens_uno`,
 			  as.numeric(rep(1, n_t*(n_th+1))),
 			  as.numeric(Surv.rsp[,1]),
 			  as.numeric((1-Surv.rsp[,2])),
@@ -40,7 +40,7 @@ spec.uno <- function(Surv.rsp.new, lpnew, times){
 	thresh <- my.sort(unique(lpnew))
 	n_th <- length(thresh)
 	n_t <- length(times)
-	ERG <- .C("C_spec_uno", 
+	ERG <- .C(`C_spec_uno`, 
 			  as.numeric(rep(0, n_t*(n_th+1))), 
 			  as.numeric(thresh), 
 			  as.numeric(times),
@@ -74,7 +74,7 @@ AUC.uno <- function(Surv.rsp, Surv.rsp.new, lpnew, times, savesensspec=FALSE){
 	n_t <- length(times)
 	
 	#### Sensetivity, Specificity and AUC.
-	auc.uno <- .C("C_auc_uno",
+	auc.uno <- .C(`C_auc_uno`,
 				  as.numeric(vector("numeric",length=n_t)),
 				  as.numeric(0),
 				  as.numeric(vector("numeric",length=n_t*(n_th+1))+1),

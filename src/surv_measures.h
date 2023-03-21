@@ -9,7 +9,7 @@
 
 
 void C_GHCI(double *lp, int *n_lp, double *ans);
-void cens_weights(double *times, int *n_times, double *stime, double *event, int *n_stime,
+void C_cens_weights(double *times, int *n_times, double *stime, double *event, int *n_stime,
 				  double *stime_new, double *event_new, int *n_stime_new, double *weights);
 SEXP C_predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 			   SEXP TIME_NEW, SEXP EVENT_NEW, SEXP N_TIME_NEW, 

@@ -1,5 +1,5 @@
 Package: survAUC
-Version: 1.1-1
+Version: 1.2-0
 Title: Estimators of Prediction Accuracy for Time-to-Event Data
 Author: Sergej Potapov, Werner Adler and Matthias Schmid.
 Description: Provides a variety of functions to estimate
@@ -8,9 +8,9 @@ Description: Provides a variety of functions to estimate
 Maintainer: Frederic Bertrand <frederic.bertrand@utt.fr>
 Depends: R (>= 2.6.0),
 Imports: survival, rms
-Date: 2022-05-19
+Date: 2023-03-21
 License: GPL-2
 Repository: CRAN
 NeedsCompilation: yes
-Packaged: 2022-05-19 17:23:26 UTC; fbertran
-Date/Publication: 2022-05-20 07:30:02 UTC
+Packaged: 2023-03-21 17:26:01 UTC; fbertran
+Date/Publication: 2023-03-21 18:20:02 UTC

@@ -27,7 +27,7 @@ AUC.cd <- function(Surv.rsp, Surv.rsp.new = NULL, lp, lpnew, times)
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	erg <- .Call("C_Cham_Diao",
+	erg <- .Call(`C_Cham_Diao`,
 				 as.numeric(lp),
 				 as.numeric(times),
 				 as.numeric(stime),

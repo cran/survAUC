@@ -24,7 +24,7 @@ AUC.hc <- function(Surv.rsp, Surv.rsp.new, lpnew, times)
 	n_lpnew <- length(lpnew)
 	auc <- vector("numeric",n_time)
 	
-	ans <- .C("C_Hung_Chiang",
+	ans <- .C(`C_Hung_Chiang`,
 			  as.numeric(times),
 			  as.integer(n_time),
 			  as.numeric(stime),

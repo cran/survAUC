@@ -33,7 +33,7 @@ UnoC <- function(Surv.rsp, Surv.rsp.new, lpnew, time = NULL)
 	}else{
 		UnoC <- 0
 	}
-	ans <- .C("C_UnoC",
+	ans <- .C(`C_UnoC`,
 			  as.numeric(time),
 			  as.numeric(event),
 			  as.integer(n),

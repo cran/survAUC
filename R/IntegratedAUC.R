@@ -22,7 +22,7 @@ IntAUC <- function(AUC, times, S, tmax, auc.type="cumulative")
 		stop("auc.type must be one of 'cumulative' or 'incident'")
 	maxI <- sum( times <= tmax )
 	ind_S <- S[min(maxI+1,length(S))]
-	iAUC <- .C("C_int_auc",
+	iAUC <- .C(`C_int_auc`,
 			   as.numeric(AUC),
 			   as.numeric(times),
 			   as.numeric(S),

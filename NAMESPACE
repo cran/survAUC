@@ -5,10 +5,9 @@ export(IntAUC, sens.uno, spec.uno, AUC.uno,
 	UnoC, schemper, BeggC)
 S3method(plot, survAUC)
 S3method(plot, survErr)
-useDynLib(survAUC)
+useDynLib(survAUC, .registration = TRUE, .fixes = "")
 
 importFrom("graphics", "lines")
 importFrom("stats", "approx", "predict")
 importFrom("rms", "cph", "predictrms")
 importFrom("survival", "Surv", "coxph","survfit")
-

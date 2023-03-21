@@ -23,7 +23,7 @@ sens.sh <- function(Surv.rsp, lp, lpnew, times, type="incident"){
 	if(is.na(type_sens))
 		stop("\nThe value of 'type' must be one of 'incident' or 'cumulative'\n")
 	
-	ans <- .Call("C_sens_SZ",
+	ans <- .Call(`C_sens_SZ`,
 				 as.numeric(unique(sort(lpnew))),
 				 as.numeric(times),
 				 as.numeric(stime),
@@ -63,7 +63,7 @@ spec.sh <- function(Surv.rsp, lp, lpnew, times){
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	ans <- .Call("C_spec_SZ",
+	ans <- .Call(`C_spec_SZ`,
 				 as.numeric(unique(sort(lpnew))),
 				 as.numeric(times),
 				 as.numeric(stime),
@@ -114,7 +114,7 @@ AUC.sh <- function(Surv.rsp, Surv.rsp.new=NULL, lp, lpnew, times, type="incident
 	n_lp <- length(lp)
 	n_lpnew <- length(lpnew)
 	
-	ans <- .Call("C_auc_SZ",
+	ans <- .Call(`C_auc_SZ`,
 				 as.numeric(unique(sort(lpnew))),
 				 as.numeric(times),
 				 as.numeric(stime),

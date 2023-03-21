@@ -24,7 +24,7 @@ seval <- function(x,y,z){
 	n_x <- length(x)
 	n_z <- length(z)
 	xz_new <- rep(0,n_x) 
-	ans <- .C("C_step_eval_R",
+	ans <- .C(`C_step_eval_R`,
 			  as.numeric(xz_new),
 			  as.numeric(z), 
 			  as.numeric(x), 
