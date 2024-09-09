@@ -4,6 +4,7 @@
  *
  *  Created by Sergej Potapov on 10.10.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
  *
  */
 
@@ -23,15 +24,15 @@ void C_Hung_Chiang(double *time, int *n_time, double *stime, double *event, int 
 	double *SX, *SXa, *St, *Sta, *Sc, *Sca; 
 	double *tmp_status, *Sc_stime, *Sc_event;
 	double tmp_nen = 0.0;
-	Sc_stime = Calloc(*n_stime, double);
-	Sc_event = Calloc(*n_stime, double);
-	SX = Calloc(*n_stime, double);
-	St = Calloc(*n_stime, double);
-	Sc = Calloc(*n_stime, double);
-	tmp_status = Calloc(*n_stime, double);
-	SXa = Calloc(*n_time, double);
-	Sta = Calloc(*n_time, double);
-	Sca = Calloc(*n_stime_new, double);
+	Sc_stime = R_Calloc(*n_stime, double);
+	Sc_event = R_Calloc(*n_stime, double);
+	SX = R_Calloc(*n_stime, double);
+	St = R_Calloc(*n_stime, double);
+	Sc = R_Calloc(*n_stime, double);
+	tmp_status = R_Calloc(*n_stime, double);
+	SXa = R_Calloc(*n_time, double);
+	Sta = R_Calloc(*n_time, double);
+	Sca = R_Calloc(*n_stime_new, double);
 	
 	for(i=0; i<*n_stime; i++){
 		tmp_status[i] = 1.0;
@@ -63,14 +64,14 @@ void C_Hung_Chiang(double *time, int *n_time, double *stime, double *event, int 
 		else
 			ans[k] = 0.0;
 	}
-	Free(SX);Free(SXa);Free(Sc);Free(Sca);Free(St);
-	Free(Sta);Free(Sc_event);Free(Sc_stime);Free(tmp_status);
+	R_Free(SX);R_Free(SXa);R_Free(Sc);R_Free(Sca);R_Free(St);
+	R_Free(Sta);R_Free(Sc_event);R_Free(Sc_stime);R_Free(tmp_status);
 	/* Calculation of iAUC */
 	
 	double *f, *S, *S_new;
-	f = Calloc(*n_time, double);
-	S_new = Calloc(*n_stime_new, double);
-	S = Calloc(*n_time, double);
+	f = R_Calloc(*n_time, double);
+	S_new = R_Calloc(*n_stime_new, double);
+	S = R_Calloc(*n_time, double);
 	
 	C_km_Daim(S_new, stime_new, event_new, n_stime_new);
 	step_eval2(S, time, S_new, stime_new, *n_time,  *n_stime_new);
@@ -93,7 +94,7 @@ void C_Hung_Chiang(double *time, int *n_time, double *stime, double *event, int 
 			}
 		}
 	}
-	Free(f);Free(S);Free(S_new);
+	R_Free(f);R_Free(S);R_Free(S_new);
 }
 
 

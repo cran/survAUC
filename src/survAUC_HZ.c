@@ -4,6 +4,7 @@
  *
  *  Created by Sergej Potapov on 22.06.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
  *
  */
 
@@ -22,8 +23,8 @@ void C_cox_weights (double *eta, double *time, int *status, double *target, doub
 	
 	int *ID_dead;
 	int *ID_at_risk;
-	ID_dead = Calloc(*N_st, int);
-	ID_at_risk = Calloc(*N_st, int);
+	ID_dead = R_Calloc(*N_st, int);
+	ID_at_risk = R_Calloc(*N_st, int);
 	
 	
 	for (i=0, j=0; i<*N_st ; i++) {
@@ -45,11 +46,11 @@ void C_cox_weights (double *eta, double *time, int *status, double *target, doub
 //	double *P0;
 //	double *P1;
 	int *indx;
-	P0 = Calloc(n, LDOUBLE);
-	P1 = Calloc(n, LDOUBLE);
-//	P0 = Calloc(n, double);
-//	P1 = Calloc(n, double);
-	indx = Calloc(n, int);
+	P0 = R_Calloc(n, LDOUBLE);
+	P1 = R_Calloc(n, LDOUBLE);
+//	P0 = R_Calloc(n, double);
+//	P1 = R_Calloc(n, double);
+	indx = R_Calloc(n, int);
 	
 	for(i=0; i < n; i++){
 		indx[i] = i;
@@ -60,13 +61,13 @@ void C_cox_weights (double *eta, double *time, int *status, double *target, doub
 		}
 		P1[i] = (LDOUBLE) exp(eta[i]) / sum_e_eta;
 	}
-	Free(ID_dead); Free(ID_at_risk);
+	R_Free(ID_dead); R_Free(ID_at_risk);
 
 	double *FP;
 	double *TP;
 
-	FP = Calloc(n+2, double);
-	TP = Calloc(n+2, double);
+	FP = R_Calloc(n+2, double);
+	TP = R_Calloc(n+2, double);
 	
 	FP[0] = 1.0; TP[0] = 1.0;
 	rsort_index(eta, indx, n);
@@ -79,7 +80,7 @@ void C_cox_weights (double *eta, double *time, int *status, double *target, doub
 		csum1 += P0[indx[i]];
 		FP[i] = 1.0 - csum1;
 	}
-	Free(indx);Free(P0);Free(P1);
+	R_Free(indx);R_Free(P0);R_Free(P1);
 	
 	for(i=0; i < (n+1); i++){
 		*AUC += 0.5*(TP[i+1] + TP[i]) * fabs(FP[i+1] - FP[i]);

@@ -4,6 +4,7 @@
  *
  *  Created by Sergej Potapov on 10.10.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
  *
  */
 
@@ -33,13 +34,13 @@ SEXP C_Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	
 	N_th_times = LENGTH(TH_TIME);
 	double *surv_new;
-	surv_new = Calloc(N_th_times*ncx,double);
+	surv_new = R_Calloc(N_th_times*ncx,double);
 
 	step_eval3(surv_new, REAL(TH_TIME), REAL(VECTOR_ELT(S1a,0)), REAL(VECTOR_ELT(S1a,1)), N_th_times, ncx, nrx);
 	UNPROTECT(1);
 	
 	double *factor1;
-	factor1 = Calloc(N_th_times,double);
+	factor1 = R_Calloc(N_th_times,double);
 	
 	for (i = 0; i < N_th_times; i++){
 		double sumf = 0.0;
@@ -51,7 +52,7 @@ SEXP C_Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	}
 	
 	double *EW;
-	EW = Calloc(N_th_times,double);
+	EW = R_Calloc(N_th_times,double);
 	
 	int n_lpnew = INTEGER(N_LPNEW)[0];
 	for (i = 0; i < n_lpnew; i++){
@@ -72,7 +73,7 @@ SEXP C_Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 			REAL(AUC)[i] = 0.0;
 		}
 	}
-	Free(EW);Free(factor1);Free(surv_new);
+	R_Free(EW);R_Free(factor1);R_Free(surv_new);
 	PROTECT(IAUC = allocVector(REALSXP,1));
 	if(TIME_NEW == R_NilValue){
 		REAL(IAUC)[0]=0.0;
@@ -81,9 +82,9 @@ SEXP C_Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 		/* Calculation of iAUC */
 		int n_new_data = INTEGER(N_TIME_NEW)[0];
 		double *f, *S, *S_new;
-		f = Calloc(N_th_times, double);
-		S_new = Calloc(n_new_data, double);
-		S = Calloc(N_th_times, double);
+		f = R_Calloc(N_th_times, double);
+		S_new = R_Calloc(n_new_data, double);
+		S = R_Calloc(N_th_times, double);
 		C_km_Daim(S_new, REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
 		step_eval2(S, REAL(TH_TIME), S_new, REAL(TIME_NEW), N_th_times, n_new_data);
 		
@@ -104,7 +105,7 @@ SEXP C_Cham_Diao(SEXP LP, SEXP TH_TIME, SEXP TIME, SEXP EVENT, SEXP N_TIME,
 					i_auc += REAL(AUC)[i] * (f[i]) / wT;
 			}
 		}
-		Free(f);Free(S);Free(S_new);
+		R_Free(f);R_Free(S);R_Free(S_new);
 		REAL(IAUC)[0] = i_auc;
 	}
 	

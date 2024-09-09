@@ -1,3 +1,7 @@
+# survAUC 1.3-0
+
+* Fix code to enforce strict use of R_HEADERS as requested by CRAN.
+
 # survAUC 1.2-0
 
 * Fix code to use native symbols as requested by CRAN.

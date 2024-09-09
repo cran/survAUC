@@ -4,6 +4,7 @@
  *
  *  Created by Sergej Potapov on 01.06.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
  *
  */
 #include <Rinternals.h>
@@ -75,11 +76,11 @@ void C_sens_uno( double *sens, double *surv_time, double *status, double *thres,
 	rsort_with_x(surv_time,status,*n_surv);
 	
 	double *S;
-	S = Calloc(*n_surv, double);
+	S = R_Calloc(*n_surv, double);
 	C_km_Daim(S, surv_time, status, n_surv);
 	
 	double *G;
-	G = Calloc(*n_new_data, double);
+	G = R_Calloc(*n_new_data, double);
 	step_eval2(G, new_surv, S, surv_time, *n_new_data, *n_surv);
 	
 	for (k = 1; k < *n_th+1; k++){
@@ -100,7 +101,7 @@ void C_sens_uno( double *sens, double *surv_time, double *status, double *thres,
 			}
 		}
 	}
-	Free(S);Free(G);
+	R_Free(S);R_Free(G);
 }
 
 
@@ -133,11 +134,11 @@ void C_auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *
 	rsort_with_x(surv_time,status,*n_surv);
 
 	double *SProb;
-	SProb = Calloc(*n_surv, double);
+	SProb = R_Calloc(*n_surv, double);
 	C_km_Daim(SProb, surv_time, status, n_surv);
 	
 	double *G;
-	G = Calloc(*n_new_data, double);
+	G = R_Calloc(*n_new_data, double);
 	step_eval2(G, new_surv_t, SProb, surv_time, *n_new_data, *n_surv);
 	
 	for (k = 1; k < *n_th+1; k++){
@@ -158,7 +159,7 @@ void C_auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *
 			}
 		}
 	}
-	Free(SProb);Free(G);
+	R_Free(SProb);R_Free(G);
 	/* Calculation of specificity */
 	double Ivec_zsp, Ivec_nsp, tmp_Ivec_zsp=0.0;
 	
@@ -185,9 +186,9 @@ void C_auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *
 	}
 	/* Calculation of iAUC */
 	double *f, *S, *S_new;
-	f = Calloc(*n_t, double);
-	S_new = Calloc(*n_new_data, double);
-	S = Calloc(*n_t, double);
+	f = R_Calloc(*n_t, double);
+	S_new = R_Calloc(*n_new_data, double);
+	S = R_Calloc(*n_t, double);
 	C_km_Daim(S_new, new_surv_t, new_event, n_new_data);
 	step_eval2(S, t, S_new, new_surv_t, *n_t, *n_new_data);
 	
@@ -209,7 +210,7 @@ void C_auc_uno( double *auc, double *i_auc, double *sens, double *spec, double *
 			}
 		}
 	}
-	Free(f);Free(S);Free(S_new);
+	R_Free(f);R_Free(S);R_Free(S_new);
 }
 
 
@@ -241,7 +242,7 @@ void C_int_auc(double *auc, double *time, double *S,
 /*  PROTECT(IntAUC = allocVector(REALSXP,1));*/
 	int i;
 	double *f;
-	f = Calloc(*n_S, double);
+	f = R_Calloc(*n_S, double);
 	
 	f[0] = 1.0 - S[0];
 	for(i=1; i<*n_S; i++){
@@ -269,7 +270,7 @@ void C_int_auc(double *auc, double *time, double *S,
 			}
 		}
 	}
-	Free(f);
+	R_Free(f);
 	/*  REAL(IntAUC)[0] = i_auc;*/
 }
 

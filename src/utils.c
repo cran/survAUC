@@ -4,6 +4,7 @@
  *
  *  Created by Sergej Potapov on 07.06.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
  *
  */
 
@@ -380,10 +381,10 @@ SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP
 	int i, j, k, time0;
 	
 	double *lp, *time, *event, *lpnew;
-	time = Calloc(*n_time, double);
-	event = Calloc(*n_time, double);
-	lp = Calloc(*n_lp, double);
-	lpnew = Calloc(*n_lpnew, double);
+	time = R_Calloc(*n_time, double);
+	event = R_Calloc(*n_time, double);
+	lp = R_Calloc(*n_lp, double);
+	lpnew = R_Calloc(*n_lpnew, double);
 	
 	for (i = 0; i < *n_lp; i++){
 		lp[i] = REAL(LP)[i];
@@ -399,8 +400,8 @@ SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP
 	rsort_xyz(time, event, lp, *n_time);
 
 	double *n_event, *R;
-	n_event = Calloc(*n_time, double);
-	R = Calloc(*n_time, double);
+	n_event = R_Calloc(*n_time, double);
+	R = R_Calloc(*n_time, double);
 	
 	double lp_mean = 0.0;
 	lp_mean = d_mean(lp,*n_lp);
@@ -413,7 +414,7 @@ SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP
 	my_rev_d(R, n_lp);
 
 	int *diff_time;
-	diff_time = Calloc(*n_time, int);
+	diff_time = R_Calloc(*n_time, int);
 	diff_time[0] = 1;
 	
 	time0 = time[0];
@@ -434,7 +435,7 @@ SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP
 			k++;
 		}
 	}
-	Free(diff_time);
+	R_Free(diff_time);
 	cum_sum(R, k);
 	for (i = 0, j = 0; i < k; i++){
 		if(n_event[i] > 0.){
@@ -463,7 +464,7 @@ SEXP C_survfit_cox( SEXP LP, SEXP TIME, SEXP EVENT, SEXP N_TIME, SEXP N_LP, SEXP
 	}
 	SEXP result_out = PROTECT(allocVector(VECSXP,3));
 
-	Free(n_event);Free(R);Free(lp);Free(time);Free(event);
+	R_Free(n_event);R_Free(R);R_Free(lp);R_Free(time);R_Free(event);
 	SET_VECTOR_ELT(result_out, 0, ans);
 	SET_VECTOR_ELT(result_out, 1, utimes);
 	SET_VECTOR_ELT(result_out, 2, nevent);

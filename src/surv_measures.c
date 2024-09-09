@@ -4,6 +4,7 @@
  *
  *  Created by Sergej Potapov on 11.10.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
  *
  */
 
@@ -45,17 +46,17 @@ void C_cens_weights(double *times, int *n_times, double *stime, double *event, i
 	
 	/* Calculation of Kaplan-Maier */
 	double *surv;
-	surv = Calloc(*n_stime, double);
+	surv = R_Calloc(*n_stime, double);
 	C_km_Daim(surv, stime, event, n_stime);
 
 	/* Calculation of survival for test data time points */
 	double *W_1_2;
-	W_1_2 = Calloc(*n_stime_new, double);
+	W_1_2 = R_Calloc(*n_stime_new, double);
 	step_eval2(W_1_2, stime_new, surv, stime, *n_stime_new, *n_stime);
 	
 	/* Calculation of survival for new time points */
 	double *W_2_2;
-	W_2_2 = Calloc(*n_times, double);
+	W_2_2 = R_Calloc(*n_times, double);
 	step_eval2(W_2_2, times, surv, stime, *n_times, *n_stime);
 
 	
@@ -68,7 +69,7 @@ void C_cens_weights(double *times, int *n_times, double *stime, double *event, i
 			}
 		}
 	}
-	Free(surv);Free(W_1_2);Free(W_2_2);
+	R_Free(surv);R_Free(W_1_2);R_Free(W_2_2);
 }
 
 
@@ -91,24 +92,24 @@ SEXP C_predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 	int n_time_new = INTEGER(N_TIME_NEW)[0];
 	int N_th_times = LENGTH(TH_TIME);
 	double *surv_new;
-	surv_new = Calloc(N_th_times*ncx,double);
+	surv_new = R_Calloc(N_th_times*ncx,double);
 	
 	double *Y;
-	Y = Calloc(N_th_times*ncx,double);	
+	Y = R_Calloc(N_th_times*ncx,double);	
 	step_eval3(surv_new, REAL(TH_TIME), REAL(VECTOR_ELT(S1a,0)), REAL(VECTOR_ELT(S1a,1)), N_th_times, ncx, nrx);
 	
 	double *weights;
-	weights = Calloc(N_th_times*ncx,double);
+	weights = R_Calloc(N_th_times*ncx,double);
 	
 	double *event;
-	event = Calloc(INTEGER(N_TIME)[0],double);
+	event = R_Calloc(INTEGER(N_TIME)[0],double);
 	for(i=0; i < INTEGER(N_TIME)[0]; i++){
 		event[i] = 1. - REAL(EVENT)[i];
 	}
 	
 	C_cens_weights(REAL(TH_TIME), INTEGER(N_TH_TIME), REAL(TIME), event, INTEGER(N_TIME),
 				 REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW), weights);
-	Free(event);
+	R_Free(event);
 	
 	/* INTEGER(TYPE)[0] = 1 - robust predicion Error */
 	/* INTEGER(TYPE)[0] = 0 - brier predicion Error */
@@ -136,7 +137,7 @@ SEXP C_predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 		}
 		REAL(ERR)[i] = temp_err / (double) n_time_new;
 	}
-	Free(weights);Free(Y);Free(surv_new);
+	R_Free(weights);R_Free(Y);R_Free(surv_new);
 	
 	SEXP IERR, result, names_result;
 	PROTECT(IERR = allocVector(REALSXP,1));
@@ -152,9 +153,9 @@ SEXP C_predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 		/* Calculation of weighted iERR */
 		int n_new_data = INTEGER(N_TIME_NEW)[0];
 		double *f, *S, *S_new;
-		f = Calloc(N_th_times, double);
-		S_new = Calloc(n_new_data, double);
-		S = Calloc(N_th_times, double);
+		f = R_Calloc(N_th_times, double);
+		S_new = R_Calloc(n_new_data, double);
+		S = R_Calloc(N_th_times, double);
 		C_km_Daim(S_new, REAL(TIME_NEW), REAL(EVENT_NEW), INTEGER(N_TIME_NEW));
 		step_eval2(S, REAL(TH_TIME), S_new, REAL(TIME_NEW), N_th_times, n_new_data);
 		
@@ -173,7 +174,7 @@ SEXP C_predError(SEXP TIME, SEXP EVENT, SEXP N_TIME,
 					i_err += REAL(ERR)[i] * f[i] / wT;
 			}
 		}
-		Free(f);Free(S);Free(S_new);
+		R_Free(f);R_Free(S);R_Free(S_new);
 		REAL(IERR)[0] = i_err;
 	}
 	
@@ -201,7 +202,7 @@ void C_partLCox(double *time, double *event, int *n_time, double *lp, int *n_lp,
 	double tmp_risk;
 	
 	double *risk;
-	risk = Calloc(*n_time, double);
+	risk = R_Calloc(*n_time, double);
 	for(i=0; i < *n_time; i++){
 		tmp_risk=0.;
 		for(j=0; j < *n_time; j++){
@@ -211,7 +212,7 @@ void C_partLCox(double *time, double *event, int *n_time, double *lp, int *n_lp,
 		risk[i] = tmp_risk;
 	}
 	double *f;
-	f = Calloc(*n_time, double);
+	f = R_Calloc(*n_time, double);
 	for(i=0; i < *n_time; i++){
 		f[i] = lp[i]*event[i];
 	}
@@ -234,7 +235,7 @@ void C_partLCox(double *time, double *event, int *n_time, double *lp, int *n_lp,
 	for(i=0; i < j+1; i++){
 		*LL += f[i] - event[i]*log(risk[i]);
 	}
-	Free(risk);Free(f);
+	R_Free(risk);R_Free(f);
 }
 
 
@@ -265,13 +266,13 @@ void C_XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, d
 {
 	int i,j;
 	double *sF;
-	sF = Calloc(*n_stime, double);
+	sF = R_Calloc(*n_stime, double);
 	
 	double *pijbeta;
-	pijbeta = Calloc(*n_stime, double);
+	pijbeta = R_Calloc(*n_stime, double);
 	
 	double *pij0;
-	pij0 = Calloc(*n_stime, double);
+	pij0 = R_Calloc(*n_stime, double);
 	
 	double tmp_sum;
 	for(i=0; i<*n_stime; i++){
@@ -285,9 +286,9 @@ void C_XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, d
 		}
 		sF[i] = tmp_sum;
 	}
-	Free(pijbeta);Free(pij0);
+	R_Free(pijbeta);R_Free(pij0);
 	double *surv;
-	surv = Calloc(*n_stime, double);
+	surv = R_Calloc(*n_stime, double);
 	C_km_Daim(surv, stime, event, n_stime);
 	
 	for(i=*n_stime-1; i>0; i--){
@@ -300,7 +301,7 @@ void C_XO(double *stime, double *event, int *n_stime, double *lp, double *lp0, d
 		GammaHat += surv[i] * sF[i];
 	}
 	*XO = 1. - exp(-2*GammaHat);
-	Free(sF);Free(surv);
+	R_Free(sF);R_Free(surv);
 }
 
 
@@ -315,11 +316,11 @@ void C_UnoC(double *stime, double *event, int *n_stime, double *new_stime,
             int *n_tau, double *CStat)
 {
 	double *surv;
-	surv = Calloc(*n_stime, double);
+	surv = R_Calloc(*n_stime, double);
 	C_km_Daim(surv, stime, event, n_stime);
 	
 	double *G;
-	G = Calloc(*new_n_stime, double);
+	G = R_Calloc(*new_n_stime, double);
 	step_eval2(G, new_stime, surv, stime, *new_n_stime, *n_stime);
 	
 	int i,j;
@@ -337,9 +338,9 @@ void C_UnoC(double *stime, double *event, int *n_stime, double *new_stime,
 	}
 	else{
 		double *denom;
-		denom = Calloc(*n_tau, double);
+		denom = R_Calloc(*n_tau, double);
 		double *num;
-		num = Calloc(*n_tau, double);
+		num = R_Calloc(*n_tau, double);
 		int k=0;
 		for(k=0; k<*n_tau; k++){
 			denom[k]=0.0, num[k]=0.0;
@@ -357,9 +358,9 @@ void C_UnoC(double *stime, double *event, int *n_stime, double *new_stime,
 				CStat[k] = num[k]/denom[k];
 			}
 		}
-		Free(denom);Free(num);
+		R_Free(denom);R_Free(num);
 	}
-	Free(surv);Free(G);
+	R_Free(surv);R_Free(G);
 }
 
 
@@ -373,7 +374,7 @@ void C_begg(double *new_stime, double *new_event, int *new_n_stime,
 {
 	int i, j;
 	double *surv_new;
-	surv_new = Calloc((*n_times)*(*new_n_stime),double);
+	surv_new = R_Calloc((*n_times)*(*new_n_stime),double);
 	step_eval3(surv_new, times, surv_prob, surv_times, *n_times, *new_n_stime, *n_surv_times);
 	
 	double tempC=0.0, Cindex=0.0;
@@ -434,7 +435,7 @@ void C_begg(double *new_stime, double *new_event, int *new_n_stime,
 		}
 	}
 	*CStat = Cindex / (*new_n_stime * (*new_n_stime - 1.0) / 2.0);
-	Free(surv_new);
+	R_Free(surv_new);
 }
 
 
