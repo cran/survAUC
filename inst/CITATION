@@ -1,0 +1,24 @@
+citHeader("To cite the", meta$Package, "package in publications use:")
+
+titl <- meta$Title
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers <- paste("R package version", meta$Version)
+doi <- paste0("10.32614/CRAN.package.", meta$Package)
+urldoi <- paste0("https://doi.org/", doi)
+
+bibentry(bibtype="Manual",
+         title = titl,
+         author = c(
+	person(given = "Sergej", family= "Potapov"),
+	person(given = "Werner", family= "Adler"),
+	person(given = "Matthias", family= "Schmid"),
+	person(given = "Frederic", family= "Bertrand")),
+         year         = year,
+         note         = vers,
+         url          = paste("https://CRAN.R-project.org/package=",meta$Package,sep=""),
+         doi         = doi,
+         textVersion = 
+         paste("Sergej Potapov, Werner Adler, Matthias Schmid and Frederic Bertrand (",year ,"). ", 
+               titl, ", ", vers, ". doi:", doi, ".", sep=""
+               )
+)

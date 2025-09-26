@@ -1,5 +1,5 @@
 //
-// 2022-05-18. Author F. Bertrand <frederic.bertrand@utt.fr>
+// 2022-05-18. Author F. Bertrand <frederic.bertrand@lecnam.net>
 //
 
 #include <stdlib.h> // for NULL

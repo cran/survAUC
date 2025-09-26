@@ -4,7 +4,7 @@
  *
  *  Created by Sergej Potapov on 22.06.10.
  *  Copyright 2010 __IMBE__. All rights reserved.
- *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@utt.fr>
+ *  2022-05-18. Updated by F. Bertrand <frederic.bertrand@lecnam.net>
  *
  */
 
